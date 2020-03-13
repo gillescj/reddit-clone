@@ -46,7 +46,6 @@ const Post = ({ post }) => {
     const handleShowContent = () => {
         if (!showContent) return;
         if (contentType === 'text') {
-            console.log(post.data.selftext);
             return <p>{post.data.selftext}</p>;
         }
         if (contentType === 'image') {
