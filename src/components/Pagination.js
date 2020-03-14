@@ -1,18 +1,38 @@
+import '../styles/Pagination.scss';
+
 import React, { useContext } from 'react';
+import StateContext from './StateContext';
 
 const Pagination = () => {
-    // const { posts, settings } = useContext(stateContext);
+    const { setPagination } = useContext(StateContext);
 
-    const nextPage = () => {};
+    const previousPage = () => {
+        setPagination(previousPagination => {
+            return {
+                ...previousPagination,
+                pageNumber:
+                    previousPagination.pageNumber === 1
+                        ? 1
+                        : previousPagination.pageNumber - 1
+            };
+        });
+    };
 
-    const previousPage = () => {};
+    const nextPage = () => {
+        setPagination(previousPagination => {
+            return {
+                ...previousPagination,
+                pageNumber: previousPagination.pageNumber + 1
+            };
+        });
+    };
 
     return (
         <div className="pagination">
-            <button onClick={nextPage()} className="prev">
+            <button onClick={previousPage} className="prev">
                 previous
             </button>
-            <button onClick={previousPage()} className="next">
+            <button onClick={nextPage} className="next">
                 next
             </button>
         </div>

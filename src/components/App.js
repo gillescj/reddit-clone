@@ -3,8 +3,9 @@ import axios from 'axios';
 
 import React, { useState, useEffect } from 'react';
 import PostList from './PostList';
+import StateContext from './StateContext';
 
-const stateContext = React.createContext();
+// const stateContext = React.createContext();
 
 const App = () => {
     const [posts, setPosts] = useState([]);
@@ -42,35 +43,14 @@ const App = () => {
         fetchData();
     }, [pagination.pageNumber]);
 
-    const previousPage = () => {
-        setPagination(previousPagination => {
-            return {
-                ...previousPagination,
-                pageNumber:
-                    previousPagination.pageNumber === 1
-                        ? 1
-                        : previousPagination.pageNumber - 1
-            };
-        });
-    };
-
-    const nextPage = () => {
-        setPagination(previousPagination => {
-            return {
-                ...previousPagination,
-                pageNumber: previousPagination.pageNumber + 1
-            };
-        });
-    };
-
     return (
-        <stateContext.Provider value={posts}>
+        <StateContext.Provider
+            value={{ posts, setPosts, pagination, setPagination, settings, setSettings }}
+        >
             <div className="container">
-                <button onClick={previousPage}>previous</button>
-                <button onClick={nextPage}>next</button>
-                <PostList posts={posts} />
+                <PostList />
             </div>
-        </stateContext.Provider>
+        </StateContext.Provider>
     );
 };
 

@@ -1,0 +1,14 @@
+.pagination {
+    button {
+        border: none;
+        background: #0079d3;
+        color: #fff;
+        padding: 0.5rem;
+        border-radius: 0.2rem;
+        margin: 0.25rem;
+        cursor: pointer;
+        &:hover {
+            background: rgb(127, 188, 233);
+        }
+    }
+}
