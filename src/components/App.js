@@ -1,11 +1,9 @@
 import '../styles/App.scss';
 import axios from 'axios';
 
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useMemo } from 'react';
 import PostList from './PostList';
 import StateContext from './StateContext';
-
-// const stateContext = React.createContext();
 
 const App = () => {
     const [posts, setPosts] = useState([]);
@@ -15,6 +13,18 @@ const App = () => {
         after: null
     });
     const [settings, setSettings] = useState({ orderBy: 'hot' });
+
+    const state = useMemo(
+        () => ({
+            posts,
+            setPosts,
+            pagination,
+            setPagination,
+            settings,
+            setSettings
+        }),
+        [posts, setPosts, pagination, setPagination, settings, setSettings]
+    );
 
     useEffect(() => {
         console.log(pagination.pageNumber);
@@ -44,9 +54,7 @@ const App = () => {
     }, [pagination.pageNumber]);
 
     return (
-        <StateContext.Provider
-            value={{ posts, setPosts, pagination, setPagination, settings, setSettings }}
-        >
+        <StateContext.Provider value={state}>
             <div className="container">
                 <PostList />
             </div>
