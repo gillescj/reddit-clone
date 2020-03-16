@@ -13,6 +13,7 @@ const App = () => {
         after: null
     });
     const [settings, setSettings] = useState({ orderBy: 'hot' });
+    const [loading, setLoading] = useState(true);
 
     const state = useMemo(
         () => ({
@@ -33,22 +34,26 @@ const App = () => {
     useEffect(() => {
         window.scrollTo(0, 0);
         const fetchData = async () => {
-            const response = await axios(
-                `https://cors-anywhere.herokuapp.com/https://reddit.com/${
-                    settings.orderBy
-                }.json?limit=5&before=${
-                    pagination.before ? pagination.before : ''
-                }&after=${pagination.after ? pagination.after : ''}&g=GLOBAL`
-                // `https://cors-anywhere.herokuapp.com/https://reddit.com/search.json?q=gifs`
-            );
+            setLoading(true);
+            const url = `https://cors-anywhere.herokuapp.com/https://reddit.com/${
+                settings.orderBy
+            }.json?limit=5&before=${pagination.before ? pagination.before : ''}&after=${
+                pagination.after ? pagination.after : ''
+            }&g=GLOBAL`;
+            // `https://cors-anywhere.herokuapp.com/https://reddit.com/search.json?q=gifs`
+
+            const response = await axios(url);
+
             console.log(response);
             console.log(response.data.data.children);
+
             setPosts(response.data.data.children);
             const { before, after } = response.data.data;
             console.log(before, after);
             setPagination(previousPagination => {
                 return { ...previousPagination, before, after };
             });
+            setLoading(false);
         };
         fetchData();
     }, [pagination.pageNumber]);
@@ -56,7 +61,7 @@ const App = () => {
     return (
         <StateContext.Provider value={state}>
             <div className="container">
-                <PostList />
+                {!loading ? <PostList /> : <div>Loading...</div>}
             </div>
         </StateContext.Provider>
     );
