@@ -1,0 +1,10 @@
+.header {
+    display: grid;
+    gap: 1rem;
+    background: white;
+    grid-template-columns: auto 1fr;
+    padding: 1rem;
+    .brand {
+        font-weight: bold;
+    }
+}

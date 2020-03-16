@@ -1,0 +1,13 @@
+.search-form {
+    input {
+        font-size: 0.75rem;
+        border: #f6f7f8 1px solid;
+        border-radius: 0.5rem;
+        background: #f6f7f8;
+        padding: 0.3rem;
+        &:focus {
+            outline: none;
+            border-color: #0079d3;
+        }
+    }
+}

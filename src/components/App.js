@@ -4,6 +4,7 @@ import axios from 'axios';
 import React, { useState, useEffect, useMemo } from 'react';
 import PostList from './PostList';
 import StateContext from './StateContext';
+import Header from './Header';
 
 const App = () => {
     const [posts, setPosts] = useState([]);
@@ -61,6 +62,7 @@ const App = () => {
     return (
         <StateContext.Provider value={state}>
             <div className="container">
+                <Header />
                 {!loading ? <PostList /> : <div>Loading...</div>}
             </div>
         </StateContext.Provider>
