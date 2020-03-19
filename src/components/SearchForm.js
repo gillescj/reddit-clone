@@ -11,7 +11,7 @@ const SearchForm = () => {
 
     const handleFormSubmit = event => {
         event.preventDefault();
-        alert('Form Submitted');
+        alert('Fake form request was submitted');
     };
 
     return (
