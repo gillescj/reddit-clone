@@ -1,10 +1,10 @@
 import '../styles/App.scss';
-import axios from 'axios';
 
 import React, { useState, useEffect, useMemo } from 'react';
 import PostList from './PostList';
 import StateContext from './StateContext';
 import Header from './Header';
+import reddit from '../apis/reddit';
 
 const App = () => {
     const [posts, setPosts] = useState([]);
@@ -48,9 +48,9 @@ const App = () => {
         window.scrollTo(0, 0);
         const fetchData = async () => {
             setLoading(true);
-            const url = `https://cors-anywhere.herokuapp.com/https://reddit.com/${settings.orderBy}.json?limit=5&${pagination.query}&g=GLOBAL`;
+            const url = `${settings.orderBy}.json?limit=5&${pagination.query}&g=GLOBAL`;
 
-            const response = await axios.get(url);
+            const response = await reddit.get(url);
 
             console.log(response);
             console.log(response.data.data.children);
