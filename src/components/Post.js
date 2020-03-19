@@ -1,6 +1,7 @@
 import '../styles/Post.scss';
 
 import React, { useState, useEffect } from 'react';
+import moment from 'moment';
 
 const Post = ({ post }) => {
     const [showContent, setShowContent] = useState(false);
@@ -40,6 +41,16 @@ const Post = ({ post }) => {
                 {showContent ? <>&times;</> : <>+</>}
             </button>
         );
+    };
+
+    const calculatePostTime = () => {
+        const postDateTime = moment.unix(post.data.created_utc);
+        const postDateFromNow = postDateTime.fromNow();
+        return postDateFromNow;
+    };
+
+    const renderPostTime = () => {
+        return;
     };
 
     // Audio not working
@@ -92,14 +103,12 @@ const Post = ({ post }) => {
     return (
         <div className="post">
             <p className="tagline">
-                r/{post.data.subreddit} Posted by u/{post.data.author} 4 hours ago
+                r/{post.data.subreddit} Posted by u/{post.data.author}{' '}
+                {calculatePostTime()}
             </p>
             <h3 className="title">{post.data.title}</h3>
             <div className="main-content-container">
                 {renderContentToggle()}
-                {/* <button onClick={handleContentToggle} className="content-toggle">
-                    {handleShowContentToggle()}
-                </button> */}
                 <div className="main-content">{handleShowContent()}</div>
                 <p className="flat-list">{post.data.num_comments} Comments</p>
             </div>
