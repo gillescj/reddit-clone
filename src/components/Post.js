@@ -43,14 +43,10 @@ const Post = ({ post }) => {
         );
     };
 
-    const calculatePostTime = () => {
+    const renderTimeAgo = () => {
         const postDateTime = moment.unix(post.data.created_utc);
         const postDateFromNow = postDateTime.fromNow();
         return postDateFromNow;
-    };
-
-    const renderPostTime = () => {
-        return;
     };
 
     // Audio not working
@@ -103,8 +99,7 @@ const Post = ({ post }) => {
     return (
         <div className="post">
             <p className="tagline">
-                r/{post.data.subreddit} Posted by u/{post.data.author}{' '}
-                {calculatePostTime()}
+                r/{post.data.subreddit} Posted by u/{post.data.author} {renderTimeAgo()}
             </p>
             <h3 className="title">{post.data.title}</h3>
             <div className="main-content-container">
