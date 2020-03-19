@@ -43,7 +43,7 @@ const App = () => {
             }&g=GLOBAL`;
             // `https://cors-anywhere.herokuapp.com/https://reddit.com/search.json?q=gifs`
 
-            const response = await axios(url);
+            const response = await axios.get(url);
 
             console.log(response);
             console.log(response.data.data.children);
