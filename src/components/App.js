@@ -11,7 +11,8 @@ const App = () => {
     const [pagination, setPagination] = useState({
         pageNumber: 1,
         before: null,
-        after: null
+        after: null,
+        query: ''
     });
     const [settings, setSettings] = useState({ orderBy: 'hot' });
     const [loading, setLoading] = useState(true);
@@ -23,9 +24,20 @@ const App = () => {
             pagination,
             setPagination,
             settings,
-            setSettings
+            setSettings,
+            loading,
+            setLoading
         }),
-        [posts, setPosts, pagination, setPagination, settings, setSettings]
+        [
+            posts,
+            setPosts,
+            pagination,
+            setPagination,
+            settings,
+            setSettings,
+            loading,
+            setLoading
+        ]
     );
 
     useEffect(() => {
@@ -36,12 +48,7 @@ const App = () => {
         window.scrollTo(0, 0);
         const fetchData = async () => {
             setLoading(true);
-            const url = `https://cors-anywhere.herokuapp.com/https://reddit.com/${
-                settings.orderBy
-            }.json?limit=5&before=${pagination.before ? pagination.before : ''}&after=${
-                pagination.after ? pagination.after : ''
-            }&g=GLOBAL`;
-            // `https://cors-anywhere.herokuapp.com/https://reddit.com/search.json?q=gifs`
+            const url = `https://cors-anywhere.herokuapp.com/https://reddit.com/${settings.orderBy}.json?limit=5&${pagination.query}&g=GLOBAL`;
 
             const response = await axios.get(url);
 
@@ -49,10 +56,15 @@ const App = () => {
             console.log(response.data.data.children);
 
             setPosts(response.data.data.children);
-            const { before, after } = response.data.data;
-            console.log(before, after);
+            const { after } = response.data.data;
+            console.log(after);
+
             setPagination(previousPagination => {
-                return { ...previousPagination, before, after };
+                return {
+                    ...previousPagination,
+                    before: response.data.data.children[0].name,
+                    after
+                };
             });
             setLoading(false);
         };

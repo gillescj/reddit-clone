@@ -13,7 +13,8 @@ const Pagination = () => {
                 pageNumber:
                     previousPagination.pageNumber === 1
                         ? 1
-                        : previousPagination.pageNumber - 1
+                        : previousPagination.pageNumber - 1,
+                query: `before=${previousPagination.before}`
             };
         });
     };
@@ -22,7 +23,8 @@ const Pagination = () => {
         setPagination(previousPagination => {
             return {
                 ...previousPagination,
-                pageNumber: previousPagination.pageNumber + 1
+                pageNumber: previousPagination.pageNumber + 1,
+                query: `after=${previousPagination.after}`
             };
         });
     };
