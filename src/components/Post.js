@@ -1,6 +1,7 @@
 import '../styles/Post.scss';
 
 import React, { useState, useEffect } from 'react';
+import { Link } from 'react-router-dom';
 import moment from 'moment';
 
 const Post = ({ post }) => {
@@ -99,7 +100,13 @@ const Post = ({ post }) => {
     return (
         <div className="post">
             <p className="tagline">
-                r/{post.data.subreddit} Posted by u/{post.data.author} {renderTimeAgo()}
+                <Link
+                    to={{ pathname: `/r/${post.data.subreddit}` }}
+                    className="post-subreddit-link"
+                >
+                    r/{post.data.subreddit}
+                </Link>{' '}
+                Posted by u/{post.data.author} {renderTimeAgo()}
             </p>
             <h3 className="title">{post.data.title}</h3>
             <div className="main-content-container">
