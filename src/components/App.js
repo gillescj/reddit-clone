@@ -42,7 +42,7 @@ const App = () => {
     );
 
     useEffect(() => {
-        console.log(pagination.pageNumber);
+        // console.log(pagination.pageNumber);
     });
 
     useEffect(() => {
@@ -50,23 +50,20 @@ const App = () => {
         const fetchData = async () => {
             setLoading(true);
             const url = `${settings.orderBy}.json?limit=5&${pagination.query}&g=GLOBAL`;
+            console.log(url);
 
             const response = await reddit.get(url);
 
-            console.log(response);
-            console.log(response.data.data.children);
-
-            setPosts(response.data.data.children);
             const { after } = response.data.data;
-            console.log(after);
 
             setPagination(previousPagination => {
                 return {
                     ...previousPagination,
-                    before: response.data.data.children[0].name,
+                    before: response.data.data.children[0].data.name,
                     after
                 };
             });
+            setPosts(response.data.data.children);
             setLoading(false);
         };
         fetchData();
