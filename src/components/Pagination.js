@@ -4,16 +4,14 @@ import React, { useContext } from 'react';
 import StateContext from './StateContext';
 
 const Pagination = () => {
-    const { setPagination } = useContext(StateContext);
+    const { pagination, setPagination } = useContext(StateContext);
 
     const previousPage = () => {
+        if (pagination.pageNumber < 2) return;
         setPagination(previousPagination => {
             return {
                 ...previousPagination,
-                pageNumber:
-                    previousPagination.pageNumber === 1
-                        ? 1
-                        : previousPagination.pageNumber - 1,
+                pageNumber: previousPagination.pageNumber - 1,
                 query: `before=${previousPagination.before}`
             };
         });
