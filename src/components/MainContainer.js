@@ -11,13 +11,19 @@ const MainContainer = () => {
     const { loading } = useContext(StateContext);
     return (
         <main className="main-container">
-            <Switch>
-                <Route path="/" exact>
-                    {!loading ? <PostList /> : <div>Loading...</div>}
-                </Route>
-                <Route path="/r/:subreddit" component={Subreddit} />
-            </Switch>
-            <ExtraInfo />
+            {loading ? (
+                <div>Loading...</div>
+            ) : (
+                <>
+                    <Switch>
+                        <Route path="/" exact>
+                            {!loading ? <PostList /> : <div>Loading...</div>}
+                        </Route>
+                        <Route path="/r/:subreddit" component={Subreddit} />
+                    </Switch>
+                    <ExtraInfo />
+                </>
+            )}
         </main>
     );
 };
