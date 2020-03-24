@@ -1,3 +1,13 @@
 .post-list {
     margin: 1rem 0;
+    .sort-menu {
+        padding: 0.5rem;
+        background: white;
+        margin: 1rem 0;
+        border-radius: 0.2rem;
+        .sort-menu-option {
+            padding: 0 0.3rem;
+            cursor: pointer;
+        }
+    }
 }
