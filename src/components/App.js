@@ -1,12 +1,11 @@
 import '../styles/App.scss';
 
 import React, { useState, useEffect, useMemo } from 'react';
-import { HashRouter, Switch, Route } from 'react-router-dom';
-import PostList from './PostList';
+import { HashRouter } from 'react-router-dom';
 import StateContext from './StateContext';
 import Header from './Header';
 import reddit from '../apis/reddit';
-import Subreddit from './Subreddit';
+import MainContainer from './MainContainer';
 
 const App = () => {
     const [posts, setPosts] = useState([]);
@@ -78,12 +77,7 @@ const App = () => {
             <div className="container">
                 <Header />
                 <HashRouter>
-                    <Switch>
-                        <Route path="/" exact>
-                            {!loading ? <PostList /> : <div>Loading...</div>}
-                        </Route>
-                        <Route path="/r/:subreddit" component={Subreddit} />
-                    </Switch>
+                    <MainContainer />
                 </HashRouter>
             </div>
         </StateContext.Provider>
