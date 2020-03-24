@@ -15,7 +15,10 @@ const App = () => {
         after: null,
         query: ''
     });
-    const [settings, setSettings] = useState({ orderBy: 'hot' });
+    const [settings, setSettings] = useState({ page: 'main', orderBy: 'hot', limit: 5 });
+    const [url, setUrl] = useState(
+        `${settings.orderBy}.json?limit=${settings.limit}&${pagination.query}&g=GLOBAL`
+    );
     const [loading, setLoading] = useState(true);
 
     const state = useMemo(
@@ -26,6 +29,8 @@ const App = () => {
             setPagination,
             settings,
             setSettings,
+            url,
+            setUrl,
             loading,
             setLoading
         }),
@@ -36,20 +41,23 @@ const App = () => {
             setPagination,
             settings,
             setSettings,
+            url,
+            setUrl,
             loading,
             setLoading
         ]
     );
 
     useEffect(() => {
-        // console.log(pagination.pageNumber);
-    });
+        setUrl(
+            `${settings.orderBy}.json?limit=${settings.limit}&${pagination.query}&g=GLOBAL`
+        );
+    }, [settings.orderBy, settings.limit, pagination.query]);
 
     useEffect(() => {
         window.scrollTo(0, 0);
         const fetchData = async () => {
             setLoading(true);
-            const url = `${settings.orderBy}.json?limit=5&${pagination.query}&g=GLOBAL`;
             console.log(url);
 
             const response = await reddit.get(url);
@@ -63,11 +71,12 @@ const App = () => {
                     after
                 };
             });
+
             setPosts(response.data.data.children);
             setLoading(false);
         };
         fetchData();
-    }, [pagination.pageNumber]);
+    }, [url]);
 
     return (
         <StateContext.Provider value={state}>
