@@ -5,6 +5,7 @@ import { Switch, Route } from 'react-router-dom';
 import PostList from './PostList';
 import Subreddit from './Subreddit';
 import StateContext from './StateContext';
+import ExtraInfo from './ExtraInfo';
 
 const MainContainer = () => {
     const { loading } = useContext(StateContext);
@@ -16,6 +17,7 @@ const MainContainer = () => {
                 </Route>
                 <Route path="/r/:subreddit" component={Subreddit} />
             </Switch>
+            <ExtraInfo />
         </main>
     );
 };
