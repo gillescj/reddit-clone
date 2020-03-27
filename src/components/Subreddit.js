@@ -6,44 +6,32 @@ import PostList from './PostList';
 
 const Subreddit = ({ match }) => {
     const {
-        setPosts,
         settings,
+        setSettings,
         pagination,
         setPagination,
         loading,
-        setLoading
+        setLoading,
+        setUrl
     } = useContext(StateContext);
 
     useEffect(() => {
         setPagination(previousPagination => {
             return {
                 ...previousPagination,
-                pageNumber: 1
+                pageNumber: 1,
+                query: ''
             };
         });
+        setSettings(previousSettings => {
+            return {
+                ...previousSettings,
+                page: `r/${match.params.subreddit}/`
+            };
+        });
+        const subredditUrl = `r/${match.params.subreddit}/${settings.orderBy}.json?limit=${settings.limit}&${pagination.query}&g=GLOBAL`;
+        setUrl(subredditUrl);
     }, []);
-
-    // Back button not working
-    useEffect(() => {
-        const fetchData = async () => {
-            setLoading(true);
-            const url = `r/${match.params.subreddit}.json?limit=10&${pagination.query}&g=GLOBAL&sort=${settings.sortBy}`;
-            const response = await reddit.get(url);
-
-            setPosts(response.data.data.children);
-            const { after } = response.data.data;
-
-            setPagination(previousPagination => {
-                return {
-                    ...previousPagination,
-                    before: response.data.data.children[0].data.name,
-                    after
-                };
-            });
-            setLoading(false);
-        };
-        fetchData();
-    }, [pagination.pageNumber]);
 
     return <div className="">{!loading ? <PostList /> : 'Loading...'}</div>;
 };

@@ -15,9 +15,9 @@ const App = () => {
         after: null,
         query: ''
     });
-    const [settings, setSettings] = useState({ page: 'main', orderBy: 'hot', limit: 5 });
+    const [settings, setSettings] = useState({ page: '', orderBy: 'hot', limit: 5 });
     const [url, setUrl] = useState(
-        `${settings.orderBy}.json?limit=${settings.limit}&${pagination.query}&g=GLOBAL`
+        `${settings.page}${settings.orderBy}.json?limit=${settings.limit}&${pagination.query}&g=GLOBAL`
     );
     const [loading, setLoading] = useState(true);
 
@@ -50,7 +50,7 @@ const App = () => {
 
     useEffect(() => {
         setUrl(
-            `${settings.orderBy}.json?limit=${settings.limit}&${pagination.query}&g=GLOBAL`
+            `${settings.page}${settings.orderBy}.json?limit=${settings.limit}&${pagination.query}&g=GLOBAL`
         );
     }, [settings.orderBy, settings.limit, pagination.query]);
 
@@ -61,6 +61,7 @@ const App = () => {
             console.log(url);
 
             const response = await reddit.get(url);
+            console.log(response);
 
             const { after } = response.data.data;
 
