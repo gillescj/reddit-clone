@@ -81,6 +81,7 @@ const Post = ({ post }) => {
                         preload="auto"
                         autoPlay="autoplay"
                         loop="loop"
+                        muted
                     ></video>
                 );
             } else {
@@ -88,7 +89,7 @@ const Post = ({ post }) => {
             }
         }
         if (contentType === 'video') {
-            return <video controls src={post.data.url}></video>;
+            return <video controls muted src={post.data.url}></video>;
         }
         if (contentType === 'reddit-video') {
             return (
