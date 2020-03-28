@@ -6,6 +6,7 @@ import PostList from './PostList';
 import Subreddit from './Subreddit';
 import StateContext from './StateContext';
 import ExtraInfo from './ExtraInfo';
+import Home from './Home';
 
 const MainContainer = () => {
     const { loading } = useContext(StateContext);
@@ -16,9 +17,7 @@ const MainContainer = () => {
             ) : (
                 <>
                     <Switch>
-                        <Route path="/" exact>
-                            {!loading ? <PostList /> : <div>Loading...</div>}
-                        </Route>
+                        <Route path="/" exact component={Home} />
                         <Route path="/r/:subreddit" component={Subreddit} />
                     </Switch>
                     <ExtraInfo />
