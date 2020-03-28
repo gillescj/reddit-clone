@@ -1,12 +1,14 @@
 import '../styles/Post.scss';
 
-import React, { useState, useEffect } from 'react';
+import React, { useState, useContext, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import moment from 'moment';
+import StateContext from './StateContext';
 
 const Post = ({ post }) => {
     const [showContent, setShowContent] = useState(false);
     const [contentType, setContentType] = useState('');
+    const { setPagination } = useContext(StateContext);
     // const [showContentToggle, setShowContentToggle] = useState(false);
 
     useEffect(() => {
@@ -30,6 +32,16 @@ const Post = ({ post }) => {
             setContentType('link');
         }
     }, []);
+
+    const resetPagination = () => {
+        setPagination(previousPagination => {
+            return {
+                ...previousPagination,
+                pageNumber: 1,
+                query: ''
+            };
+        });
+    };
 
     const handleContentToggle = () => {
         setShowContent(previousShowContent => !previousShowContent);
@@ -103,6 +115,7 @@ const Post = ({ post }) => {
                 <Link
                     to={{ pathname: `/r/${post.data.subreddit}` }}
                     className="post-subreddit-link"
+                    onClick={() => resetPagination()}
                 >
                     r/{post.data.subreddit}
                 </Link>{' '}
