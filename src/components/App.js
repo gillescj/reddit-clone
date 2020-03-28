@@ -63,13 +63,14 @@ const App = () => {
             const response = await reddit.get(url);
             console.log(response);
 
-            const { after } = response.data.data;
-
             setPagination(previousPagination => {
                 return {
                     ...previousPagination,
                     before: response.data.data.children[0].data.name,
-                    after
+                    after:
+                        response.data.data.children[
+                            response.data.data.children.length - 1
+                        ].data.name
                 };
             });
 
