@@ -3,7 +3,9 @@ import '../styles/Post.scss';
 import React, { useState, useContext, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import moment from 'moment';
+import numeral from 'numeral';
 import StateContext from './StateContext';
+import { render } from '@testing-library/react';
 
 const Post = ({ post }) => {
     const [showContent, setShowContent] = useState(false);
@@ -110,23 +112,38 @@ const Post = ({ post }) => {
         }
     };
 
+    const constRenderBottom = (numComments, score) => {};
+
     return (
         <div className="post">
-            <p className="tagline">
-                <Link
-                    to={{ pathname: `/r/${post.data.subreddit}` }}
-                    className="post-subreddit-link"
-                    onClick={() => resetPagination()}
-                >
-                    r/{post.data.subreddit}
-                </Link>{' '}
-                Posted by u/{post.data.author} {renderTimeAgo()}
-            </p>
-            <h3 className="title">{post.data.title}</h3>
-            <div className="main-content-container">
+            <div className="post-left">
+                <div className="score">
+                    {Math.abs(post.data.score) > 999
+                        ? numeral(post.data.score).format('0.0a')
+                        : post.data.score}
+                </div>
                 {renderContentToggle()}
-                <div className="main-content">{handleShowContent()}</div>
-                <p className="flat-list">{post.data.num_comments} Comments</p>
+            </div>
+            <div className="post-right">
+                <p className="tagline">
+                    <Link
+                        to={{ pathname: `/r/${post.data.subreddit}` }}
+                        className="post-subreddit-link"
+                        onClick={() => resetPagination()}
+                    >
+                        r/{post.data.subreddit}
+                    </Link>{' '}
+                    Posted by u/{post.data.author} {renderTimeAgo()}
+                </p>
+                <h3 className="title">{post.data.title}</h3>
+                <div className="main-content-container">
+                    <div className="main-content">{handleShowContent()}</div>
+                    <div className="flat-list">
+                        <span className="comments">
+                            {post.data.num_comments} Comments{' '}
+                        </span>
+                    </div>
+                </div>
             </div>
         </div>
     );
