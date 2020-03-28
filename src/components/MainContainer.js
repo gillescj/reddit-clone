@@ -2,7 +2,6 @@ import '../styles/MainContainer.scss';
 
 import React, { useContext } from 'react';
 import { Switch, Route } from 'react-router-dom';
-import PostList from './PostList';
 import Subreddit from './Subreddit';
 import StateContext from './StateContext';
 import ExtraInfo from './ExtraInfo';

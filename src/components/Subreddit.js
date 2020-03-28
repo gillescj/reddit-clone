@@ -4,16 +4,9 @@ import StateContext from './StateContext';
 import PostList from './PostList';
 
 const Subreddit = ({ match }) => {
-    const [subPage, setSubPage] = useState(1);
-    const [subQuery, setSubQuery] = useState('');
-    const {
-        settings,
-        setSettings,
-        pagination,
-        setPagination,
-        loading,
-        setUrl
-    } = useContext(StateContext);
+    const { settings, setSettings, pagination, loading, setUrl } = useContext(
+        StateContext
+    );
 
     useEffect(() => {
         setSettings(previousSettings => {
