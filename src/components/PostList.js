@@ -12,24 +12,8 @@ const PostList = () => {
         return <Post key={post.data.id} post={post} />;
     });
 
-    const handleSortMenuOptionClick = option => {
-        setPagination(previousPagination => {
-            return {
-                ...previousPagination,
-                pageNumber: 1,
-                query: ''
-            };
-        });
-        setSettings(previousSettings => {
-            return {
-                ...previousSettings,
-                orderBy: option
-            };
-        });
-    };
-
-    return (
-        <div className="post-list">
+    const renderedSortMenu = (
+        <div className="options-menu">
             <div className="sort-menu">
                 <span
                     onClick={() => handleSortMenuOptionClick('hot')}
@@ -64,6 +48,59 @@ const PostList = () => {
                     rising
                 </span>
             </div>
+            <div className="limit-menu">
+                <span>
+                    limit{' '}
+                    <select
+                        className="limit-select"
+                        onChange={event => handleSortMenuLimitClick(event.target.value)}
+                        value={settings.limit}
+                    >
+                        <option value="10">10</option>
+                        <option value="25">25</option>
+                        <option value="50">50</option>
+                        <option value="100">100</option>
+                    </select>
+                </span>
+            </div>
+        </div>
+    );
+
+    const handleSortMenuOptionClick = option => {
+        setPagination(previousPagination => {
+            return {
+                ...previousPagination,
+                pageNumber: 1,
+                query: ''
+            };
+        });
+        setSettings(previousSettings => {
+            return {
+                ...previousSettings,
+                orderBy: option
+            };
+        });
+    };
+
+    const handleSortMenuLimitClick = limitNumber => {
+        setPagination(previousPagination => {
+            return {
+                ...previousPagination,
+                pageNumber: 1,
+                query: ''
+            };
+        });
+        setSettings(previousSettings => {
+            return {
+                ...previousSettings,
+                limit: limitNumber
+            };
+        });
+    };
+
+    return (
+        <div className="post-list">
+            {renderedSortMenu}
             {renderedPostList}
             <Pagination />
         </div>

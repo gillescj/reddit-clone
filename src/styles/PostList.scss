@@ -1,6 +1,8 @@
 .post-list {
     margin: 1rem 0;
-    .sort-menu {
+    .options-menu {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
         padding: 0.5rem;
         background: white;
         margin: 1rem 0;
@@ -11,6 +13,9 @@
         }
         .sort-menu-option-selected {
             color: #0079d3;
+        }
+        .limit-menu {
+            justify-self: end;
         }
     }
 }
