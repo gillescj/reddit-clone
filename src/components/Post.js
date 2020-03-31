@@ -5,13 +5,11 @@ import { Link } from 'react-router-dom';
 import moment from 'moment';
 import numeral from 'numeral';
 import StateContext from './StateContext';
-import { render } from '@testing-library/react';
 
 const Post = ({ post }) => {
     const [showContent, setShowContent] = useState(false);
     const [contentType, setContentType] = useState('');
     const { setPagination } = useContext(StateContext);
-    // const [showContentToggle, setShowContentToggle] = useState(false);
 
     useEffect(() => {
         if (post.data.selftext !== '') {
@@ -112,8 +110,6 @@ const Post = ({ post }) => {
         }
     };
 
-    const constRenderBottom = (numComments, score) => {};
-
     return (
         <div className="post">
             <div className="post-left">
@@ -135,13 +131,18 @@ const Post = ({ post }) => {
                     </Link>{' '}
                     Posted by u/{post.data.author} {renderTimeAgo()}
                 </p>
-                <h3 className="title">{post.data.title}</h3>
+                <Link to={{ pathname: `/p/${post.data.name}` }} className="title-link">
+                    <h3 className="title">{post.data.title}</h3>
+                </Link>
                 <div className="main-content-container">
                     <div className="main-content">{handleShowContent()}</div>
                     <div className="flat-list">
-                        <span className="comments">
+                        <Link
+                            to={{ pathname: `/p/${post.data.name}` }}
+                            className="comments"
+                        >
                             {post.data.num_comments} Comments{' '}
-                        </span>
+                        </Link>
                     </div>
                 </div>
             </div>

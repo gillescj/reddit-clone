@@ -28,18 +28,33 @@
     .post-right {
         .tagline {
             color: #787c7e;
-            font-size: small;
+            font-size: x-small;
+            .post-subreddit-link {
+                text-decoration: none;
+                color: black;
+                font-weight: bold;
+                &:hover {
+                    text-decoration: underline;
+                }
+            }
         }
-        .title {
-            color: #222222;
-            font-size: 16px;
-            font-weight: 600;
-            padding: 0.2rem 0;
+        .title-link {
+            text-decoration: none;
+            .title {
+                color: #222222;
+                font-size: 16px;
+                font-weight: 600;
+                padding: 0.2rem 0;
+            }
         }
         .flat-list {
             color: #787c7e;
             font-size: small;
             font-weight: 900;
+            a {
+                text-decoration: none;
+                color: #787c7e;
+            }
         }
         .main-content-container {
             .main-content {
