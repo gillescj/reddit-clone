@@ -141,7 +141,10 @@ const Post = ({ post }) => {
                             to={{ pathname: `/p/${post.data.name}` }}
                             className="comments"
                         >
-                            {post.data.num_comments} Comments{' '}
+                            {Math.abs(post.data.num_comments) > 999
+                                ? numeral(post.data.num_comments).format('0.0a')
+                                : post.data.num_comments}{' '}
+                            Comments{' '}
                         </Link>
                     </div>
                 </div>
