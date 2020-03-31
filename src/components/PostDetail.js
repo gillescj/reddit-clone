@@ -1,44 +1,26 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
+import reddit from '../apis/reddit';
 import Comment from './Comment';
-
-// import StateContext from './StateContext';
+import CommentList from './CommentList';
 
 const PostDetail = ({ match }) => {
-    // const { settings, setSettings, pagination, loading, setUrl } = useContext(
-    //     StateContext
-    // );
+    const [post, setPost] = useState();
+    const [comments, setComments] = useState();
+    const [postUrl, setpostUrl] = useState(`comments/${match.params.postId}.json`);
 
-    // useEffect(() => {
-    //     setSettings(previousSettings => {
-    //         return {
-    //             ...previousSettings,
-    //             page: `r/${match.params.subreddit}/`
-    //         };
-    //     });
-    //     const subredditUrl = `r/${match.params.subreddit}/${settings.orderBy}.json?limit=${settings.limit}&${pagination.query}&g=GLOBAL`;
-    //     setUrl(subredditUrl);
-    // }, []);
+    useEffect(() => {
+        const fetchData = async () => {
+            const response = await reddit.get(postUrl);
+            setPost(response.data[0].data.children[0].data);
+            setComments(response.data[1].data.children);
+        };
+        fetchData();
+    }, []);
 
     return (
         <div className="post-detail">
-            <div>Post Detail: {match.params.postFullName}</div>
-            <Comment
-                id="12"
-                author="coolguy99"
-                score={11333}
-                datePosted={0}
-                content="Lorem ipsum dolor sit amet consectetur adipisicing elit. Nam molestias veniam natus obcaecati modi nobis id unde necessitatibus blanditiis. Numquam?"
-                replies={[
-                    {
-                        id: '10',
-                        author: 'usertestname',
-                        score: 373,
-                        datePosted: 10000,
-                        content:
-                            'Lorem ipsum dolor sit. Nam molestias veniam natus obcaecati modi nobis id unde necessitatibus blanditiis. Numquam?'
-                    }
-                ]}
-            />
+            <div>Post Detail: {match.params.postId}</div>
+            <CommentList comments={comments} />
         </div>
     );
 };

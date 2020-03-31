@@ -19,7 +19,7 @@ const MainContainer = () => {
                     <Switch>
                         <Route path="/" exact component={Home} />
                         <Route path="/r/:subreddit" component={Subreddit} />
-                        <Route path="/p/:postFullName" component={PostDetail} />
+                        <Route path="/p/:postId" component={PostDetail} />
                     </Switch>
                     <ExtraInfo />
                 </>

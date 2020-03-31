@@ -131,14 +131,14 @@ const Post = ({ post }) => {
                     </Link>{' '}
                     Posted by u/{post.data.author} {renderTimeAgo()}
                 </p>
-                <Link to={{ pathname: `/p/${post.data.name}` }} className="title-link">
+                <Link to={{ pathname: `/p/${post.data.id}` }} className="title-link">
                     <h3 className="title">{post.data.title}</h3>
                 </Link>
                 <div className="main-content-container">
                     <div className="main-content">{handleShowContent()}</div>
                     <div className="flat-list">
                         <Link
-                            to={{ pathname: `/p/${post.data.name}` }}
+                            to={{ pathname: `/p/${post.data.id}` }}
                             className="comments"
                         >
                             {Math.abs(post.data.num_comments) > 999

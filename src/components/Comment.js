@@ -5,40 +5,37 @@ import React from 'react';
 import moment from 'moment';
 import numeral from 'numeral';
 
-const Comment = ({ id, author, score, datePosted, content, replies }) => {
+const Comment = ({ comment }) => {
     const renderTimeAgo = () => {
-        const postDateTime = moment.unix(datePosted);
+        const postDateTime = moment.unix(comment.data.created_utc);
         const postDateFromNow = postDateTime.fromNow();
         return postDateFromNow;
     };
 
+    // Not rendering everything
     const renderReplyList = () => {
-        if (!replies) return;
-        if (replies.length === 0) return;
-        return replies.map(reply => {
-            return (
-                <Comment
-                    key={reply.id}
-                    author={reply.author}
-                    score={reply.score}
-                    datePosted={reply.datePosted}
-                    content={reply.content}
-                    replies={reply.replies}
-                />
-            );
+        if (!comment) return;
+        if (!comment.data) return;
+        if (!comment.data.replies) return;
+        if (comment.data.replies.length === 0) return;
+        return comment.data.replies.data.children.map(reply => {
+            return <Comment key={reply.data.id} comment={reply} />;
         });
     };
 
     return (
-        <div key={id} className="comment">
+        <div key={comment.data.id} className="comment">
             <div className="top-info">
-                <span className="comment-author">{author}</span>
+                <span className="comment-author">{comment.data.author}</span>
                 <span className="score">
-                    {Math.abs(score) > 999 ? numeral(score).format('0.0a') : score} points
+                    {Math.abs(comment.data.score) > 999
+                        ? numeral(comment.data.score).format('0.0a')
+                        : comment.data.score}{' '}
+                    points
                 </span>
                 <span className="datePosted">{renderTimeAgo()}</span>
             </div>
-            <p className="text-content">{content}</p>
+            <p className="text-content">{comment.data.body}</p>
             {renderReplyList()}
         </div>
     );
