@@ -2,7 +2,7 @@
 
 A Reddit clone web application.
 
-I developed this to practice React Hooks and the Context API.
+I developed this to get practice with React Hooks and the Context API.
 
 Using the [Reddit API](https://reddit.com/dev/api)
 
