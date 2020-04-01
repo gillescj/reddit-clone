@@ -11,6 +11,8 @@ const Post = ({ post }) => {
     const [contentType, setContentType] = useState('');
     const { setPagination } = useContext(StateContext);
 
+    const parser = new DOMParser();
+
     useEffect(() => {
         if (post.data.selftext !== '') {
             setContentType('text');
@@ -66,7 +68,16 @@ const Post = ({ post }) => {
     const handleShowContent = () => {
         if (!showContent) return;
         if (contentType === 'text') {
-            return <p>{post.data.selftext}</p>;
+            return (
+                <p>
+                    {
+                        parser.parseFromString(
+                            `<!doctype html><body>${post.data.selftext}`,
+                            'text/html'
+                        ).body.textContent
+                    }
+                </p>
+            );
         }
         if (contentType === 'image') {
             return <img src={post.data.url} alt={post.data.title} />;
