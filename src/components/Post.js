@@ -4,6 +4,9 @@ import React, { useState, useContext, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import moment from 'moment';
 import numeral from 'numeral';
+import showdown from 'showdown';
+import ReactHtmlParser from 'react-html-parser';
+
 import StateContext from './StateContext';
 
 const Post = ({ post }) => {
@@ -11,7 +14,7 @@ const Post = ({ post }) => {
     const [contentType, setContentType] = useState('');
     const { setPagination } = useContext(StateContext);
 
-    const parser = new DOMParser();
+    const converter = new showdown.Converter();
 
     useEffect(() => {
         if (post.data.selftext !== '') {
@@ -68,16 +71,7 @@ const Post = ({ post }) => {
     const handleShowContent = () => {
         if (!showContent) return;
         if (contentType === 'text') {
-            return (
-                <p>
-                    {
-                        parser.parseFromString(
-                            `<!doctype html><body>${post.data.selftext}`,
-                            'text/html'
-                        ).body.textContent
-                    }
-                </p>
-            );
+            return <div>{ReactHtmlParser(converter.makeHtml(post.data.selftext))}</div>;
         }
         if (contentType === 'image') {
             return <img src={post.data.url} alt={post.data.title} />;

@@ -4,9 +4,12 @@ import React from 'react';
 
 import moment from 'moment';
 import numeral from 'numeral';
+import showdown from 'showdown';
+import ReactHtmlParser from 'react-html-parser';
 
 const Comment = ({ comment, depth }) => {
-    const parser = new DOMParser();
+    const converter = new showdown.Converter();
+
     const renderTimeAgo = () => {
         const postDateTime = moment.unix(comment.data.created_utc);
         const postDateFromNow = postDateTime.fromNow();
@@ -42,14 +45,9 @@ const Comment = ({ comment, depth }) => {
                 </span>
                 <span className="datePosted">{renderTimeAgo()}</span>
             </div>
-            <p className="text-content">
-                {
-                    parser.parseFromString(
-                        `<!doctype html><body>${comment.data.body}`,
-                        'text/html'
-                    ).body.textContent
-                }
-            </p>
+            <div className="text-content">
+                {ReactHtmlParser(converter.makeHtml(comment.data.body))}
+            </div>
             {renderReplyList()}
         </div>
     );
