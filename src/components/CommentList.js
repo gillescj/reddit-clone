@@ -5,7 +5,7 @@ const CommentList = ({ comments }) => {
     const renderCommentList = () => {
         if (!comments) return;
         return comments.map(comment => {
-            return <Comment key={comment.data.id} comment={comment} />;
+            return <Comment key={comment.data.id} comment={comment} depth="odd" />;
         });
     };
 
