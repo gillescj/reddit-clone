@@ -75,19 +75,17 @@ const OptionsMenu = () => {
                 </span>
             </div>
             <div className="limit-menu">
-                <span>
-                    limit{' '}
-                    <select
-                        className="limit-select"
-                        onChange={event => handleSortMenuLimitClick(event.target.value)}
-                        value={settings.limit}
-                    >
-                        <option value="10">10</option>
-                        <option value="25">25</option>
-                        <option value="50">50</option>
-                        <option value="100">100</option>
-                    </select>
-                </span>
+                limit{' '}
+                <select
+                    className="limit-select"
+                    onChange={event => handleSortMenuLimitClick(event.target.value)}
+                    value={settings.limit}
+                >
+                    <option value="10">10</option>
+                    <option value="25">25</option>
+                    <option value="50">50</option>
+                    <option value="100">100</option>
+                </select>
             </div>
         </div>
     );

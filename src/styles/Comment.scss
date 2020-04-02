@@ -1,19 +1,31 @@
 .comment {
-    padding: 0.5rem 0.5rem 0.5rem 1.5rem;
+    padding: 0rem 0.5rem 0rem 1rem;
     background: white;
-    margin: 1rem 0;
+    margin: 0.5rem 0;
     border-radius: 0.2rem;
     border: 1px solid #dee5e7;
+    border-left: 2px solid #dee5e7;
     word-wrap: break-word;
     &.even {
         background: #f7f7f8;
     }
+    &:hover {
+        border-left: 2px solid rgb(127, 188, 233);
+    }
+
     .top-info {
         span {
             margin-right: 0.5rem;
+            font-size: small;
         }
         .comment-author {
             font-weight: bold;
+            color: #1c1c1c;
+        }
+    }
+    .text-content {
+        p {
+            font-size: 0.9rem;
         }
     }
 }

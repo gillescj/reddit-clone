@@ -71,7 +71,11 @@ const Post = ({ post }) => {
     const handleShowContent = () => {
         if (!showContent) return;
         if (contentType === 'text') {
-            return <div>{ReactHtmlParser(converter.makeHtml(post.data.selftext))}</div>;
+            return (
+                <div className="text-content">
+                    {ReactHtmlParser(converter.makeHtml(post.data.selftext))}
+                </div>
+            );
         }
         if (contentType === 'image') {
             return <img src={post.data.url} alt={post.data.title} />;

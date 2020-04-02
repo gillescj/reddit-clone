@@ -6,6 +6,7 @@
     margin: 1rem 0;
     border-radius: 0.2rem;
     .sort-menu-option {
+        font-size: 1rem;
         padding: 0 0.3rem;
         cursor: pointer;
     }
@@ -14,5 +15,10 @@
     }
     .limit-menu {
         justify-self: end;
+        font-size: 1rem;
+        .limit-select {
+            font-size: 1rem;
+            border: none;
+        }
     }
 }
