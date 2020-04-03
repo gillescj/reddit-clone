@@ -65,6 +65,15 @@
                     font-size: 0.9rem;
                     padding-bottom: 0.5rem;
                 }
+                ul,
+                ol {
+                    list-style-position: inside;
+                    li > * {
+                        &:nth-child(1) {
+                            display: inline;
+                        }
+                    }
+                }
                 img {
                     max-width: 100%;
                     max-height: 40rem;

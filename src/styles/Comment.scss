@@ -28,7 +28,8 @@
             font-size: 0.9rem;
             padding-bottom: 0.5rem;
         }
-        ul {
+        ul,
+        ol {
             list-style-position: inside;
             li > * {
                 &:nth-child(1) {
