@@ -9,7 +9,7 @@ import ReactHtmlParser from 'react-html-parser';
 
 import StateContext from './StateContext';
 
-const Post = ({ post }) => {
+const Post = ({ post, detailed }) => {
     const [showContent, setShowContent] = useState(false);
     const [contentType, setContentType] = useState('');
     const { setPagination } = useContext(StateContext);
@@ -36,6 +36,7 @@ const Post = ({ post }) => {
         } else {
             setContentType('link');
         }
+        if (detailed) setShowContent(true);
     }, []);
 
     const resetPagination = () => {
@@ -46,6 +47,10 @@ const Post = ({ post }) => {
                 query: ''
             };
         });
+    };
+
+    const formatNumber = number => {
+        return Math.abs(number) > 999 ? numeral(number).format('0.0a') : number;
     };
 
     const handleContentToggle = () => {
@@ -65,6 +70,21 @@ const Post = ({ post }) => {
         const postDateTime = moment.unix(post.data.created_utc);
         const postDateFromNow = postDateTime.fromNow();
         return postDateFromNow;
+    };
+
+    const renderTagline = () => {
+        return (
+            <p className="tagline">
+                <Link
+                    to={{ pathname: `/r/${post.data.subreddit}` }}
+                    className="post-subreddit-link"
+                    onClick={() => resetPagination()}
+                >
+                    r/{post.data.subreddit}{' '}
+                </Link>
+                Posted by u/{post.data.author} {renderTimeAgo()}
+            </p>
+        );
     };
 
     // Audio not working
@@ -122,39 +142,33 @@ const Post = ({ post }) => {
     return (
         <div className="post">
             <div className="post-left">
-                <div className="score">
-                    {Math.abs(post.data.score) > 999
-                        ? numeral(post.data.score).format('0.0a')
-                        : post.data.score}
-                </div>
+                <div className="score">{formatNumber(post.data.score)}</div>
                 {renderContentToggle()}
             </div>
             <div className="post-right">
-                <p className="tagline">
-                    <Link
-                        to={{ pathname: `/r/${post.data.subreddit}` }}
-                        className="post-subreddit-link"
-                        onClick={() => resetPagination()}
-                    >
-                        r/{post.data.subreddit}
-                    </Link>{' '}
-                    Posted by u/{post.data.author} {renderTimeAgo()}
-                </p>
-                <Link to={{ pathname: `/p/${post.data.id}` }} className="title-link">
+                {renderTagline()}
+                {detailed ? (
                     <h3 className="title">{post.data.title}</h3>
-                </Link>
+                ) : (
+                    <Link to={{ pathname: `/p/${post.data.id}` }} className="title-link">
+                        <h3 className="title">{post.data.title}</h3>
+                    </Link>
+                )}
                 <div className="main-content-container">
                     <div className="main-content">{handleShowContent()}</div>
                     <div className="flat-list">
-                        <Link
-                            to={{ pathname: `/p/${post.data.id}` }}
-                            className="comments"
-                        >
-                            {Math.abs(post.data.num_comments) > 999
-                                ? numeral(post.data.num_comments).format('0.0a')
-                                : post.data.num_comments}{' '}
-                            Comments{' '}
-                        </Link>
+                        {detailed ? (
+                            <span className="comments">
+                                {formatNumber(post.data.num_comments)} Comments{' '}
+                            </span>
+                        ) : (
+                            <Link
+                                to={{ pathname: `/p/${post.data.id}` }}
+                                className="comments"
+                            >
+                                {formatNumber(post.data.num_comments)} Comments{' '}
+                            </Link>
+                        )}
                     </div>
                 </div>
             </div>

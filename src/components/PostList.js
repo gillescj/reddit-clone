@@ -10,7 +10,7 @@ const PostList = () => {
     const { posts } = useContext(StateContext);
 
     const renderedPostList = posts.map(post => {
-        return <Post key={post.data.id} post={post} />;
+        return <Post key={post.data.id} post={post} detailed={false} />;
     });
 
     return (

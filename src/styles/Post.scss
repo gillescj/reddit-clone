@@ -42,17 +42,18 @@
         }
         .title-link {
             text-decoration: none;
-            .title {
-                color: #222222;
-                font-size: 1rem;
-                font-weight: 600;
-                padding: 0.2rem 0;
-            }
         }
+        .title {
+            color: #222222;
+            font-size: 1rem;
+            font-weight: 600;
+            padding: 0.2rem 0;
+        }
+
         .flat-list {
             color: #787c7e;
             font-weight: 900;
-            a {
+            .comments {
                 text-decoration: none;
                 color: #787c7e;
                 font-size: small;
@@ -62,7 +63,7 @@
             .main-content {
                 img {
                     max-width: 100%;
-                    max-height: 50rem;
+                    max-height: 40rem;
                 }
                 video {
                     max-width: 100%;
