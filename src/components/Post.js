@@ -32,6 +32,8 @@ const Post = ({ post, detailed }) => {
                 setContentType('reddit-video');
             } else if (post.data.media.type && post.data.media.type === 'gfycat.com') {
                 setContentType('gfycat');
+            } else if (post.data.media.type && post.data.media.type === 'youtube.com') {
+                setContentType('youtube');
             }
         } else {
             setContentType('link');
@@ -136,6 +138,14 @@ const Post = ({ post, detailed }) => {
             return (
                 <img src={post.data.media.oembed.thumbnail_url} alt={post.data.title} />
             );
+        }
+        if (contentType === 'youtube') {
+            const youtubeId = post.data.media.oembed.html.substring(
+                post.data.media.oembed.html.indexOf('embed/') + 6,
+                post.data.media.oembed.html.indexOf('?')
+            );
+            const videoSrc = `https://www.youtube.com/embed/${youtubeId}`;
+            return <iframe title={post.data.media.oembed.title} src={videoSrc}></iframe>;
         }
     };
 
