@@ -30,7 +30,11 @@ const Comment = ({ comment, depth }) => {
                         className="comment-unloaded"
                     >
                         {
-                            <a href={`https://www.reddit.com${parentPermalink}`}>
+                            <a
+                                href={`https://www.reddit.com${parentPermalink}`}
+                                target="_blank"
+                                rel="noopener noreferrer"
+                            >
                                 more replies...
                             </a>
                         }
