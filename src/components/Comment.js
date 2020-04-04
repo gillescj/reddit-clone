@@ -16,20 +16,35 @@ const Comment = ({ comment, depth }) => {
         return postDateFromNow;
     };
 
-    // Not rendering everything
+    // Not rendering morechildren
     const renderReplyList = () => {
         if (!comment) return;
-        if (!comment.data) return;
+        // if (!comment.data) return;
+        const parentPermalink = comment.data.permalink;
         if (!comment.data.replies) return;
-        if (comment.data.replies.length === 0) return;
         return comment.data.replies.data.children.map(reply => {
-            return (
-                <Comment
-                    key={reply.data.id}
-                    comment={reply}
-                    depth={depth === 'odd' ? 'even' : 'odd'}
-                />
-            );
+            if (reply.kind === 'more') {
+                return (
+                    <div
+                        key={`${reply.data.id}unloadedChildren`}
+                        className="comment-unloaded"
+                    >
+                        {
+                            <a href={`https://www.reddit.com${parentPermalink}`}>
+                                more replies...
+                            </a>
+                        }
+                    </div>
+                );
+            } else {
+                return (
+                    <Comment
+                        key={reply.data.id}
+                        comment={reply}
+                        depth={depth === 'odd' ? 'even' : 'odd'}
+                    />
+                );
+            }
         });
     };
 
