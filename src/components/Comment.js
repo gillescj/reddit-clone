@@ -10,6 +10,10 @@ import ReactHtmlParser from 'react-html-parser';
 const Comment = ({ comment, depth }) => {
     const converter = new showdown.Converter();
 
+    const formatNumber = number => {
+        return Math.abs(number) > 999 ? numeral(number).format('0.0a') : number;
+    };
+
     const renderTimeAgo = () => {
         const postDateTime = moment.unix(comment.data.created_utc);
         const postDateFromNow = postDateTime.fromNow();
@@ -57,10 +61,9 @@ const Comment = ({ comment, depth }) => {
             <div className="top-info">
                 <span className="comment-author">{comment.data.author}</span>
                 <span className="score">
-                    {Math.abs(comment.data.score) > 999
-                        ? numeral(comment.data.score).format('0.0a')
-                        : comment.data.score}{' '}
-                    points
+                    {comment.data.score_hidden
+                        ? '[score hidden]'
+                        : `${formatNumber(comment.data.score)} points`}
                 </span>
                 <span className="datePosted">{renderTimeAgo()}</span>
             </div>
