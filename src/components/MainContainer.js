@@ -24,6 +24,15 @@ const MainContainer = () => {
     } = useContext(StateContext);
 
     useEffect(() => {
+        setSettings(previousSettings => {
+            return {
+                ...previousSettings,
+                page: ''
+            };
+        });
+    }, []);
+
+    useEffect(() => {
         setUrl(
             `${settings.page}${settings.orderBy}.json?limit=${settings.limit}&${pagination.query}&g=GLOBAL`
         );
