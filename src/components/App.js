@@ -12,7 +12,7 @@ const App = () => {
         pageNumber: 1,
         before: null,
         after: null,
-        query: ''
+        query: '',
     });
     const [settings, setSettings] = useState({ page: '', orderBy: 'hot', limit: 25 });
     const [url, setUrl] = useState(
@@ -31,7 +31,7 @@ const App = () => {
             url,
             setUrl,
             loading,
-            setLoading
+            setLoading,
         }),
         [
             posts,
@@ -43,15 +43,15 @@ const App = () => {
             url,
             setUrl,
             loading,
-            setLoading
+            setLoading,
         ]
     );
 
     return (
         <StateContext.Provider value={state}>
             <div className="container">
-                <Header />
                 <HashRouter>
+                    <Header />
                     <MainContainer />
                 </HashRouter>
             </div>
