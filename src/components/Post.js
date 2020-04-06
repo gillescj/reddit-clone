@@ -1,12 +1,12 @@
 import '../styles/Post.scss';
-
-import React, { useState, useContext, useEffect } from 'react';
-import { Link } from 'react-router-dom';
 import moment from 'moment';
 import numeral from 'numeral';
 import showdown from 'showdown';
 import ReactHtmlParser from 'react-html-parser';
 
+import React, { useState, useContext, useEffect } from 'react';
+import { Link } from 'react-router-dom';
+import { ReactComponent as ExternalLinkSVG } from '../assets/svgs/external-link.svg';
 import StateContext from './StateContext';
 
 const Post = ({ post, detailed }) => {
@@ -35,37 +35,52 @@ const Post = ({ post, detailed }) => {
             } else if (post.data.media.type && post.data.media.type === 'youtube.com') {
                 setContentType('youtube');
             }
-        } else {
+        } else if (post.data.domain.split('.')[0] !== 'self') {
             setContentType('link');
+        } else {
+            setContentType('none');
         }
         if (detailed) setShowContent(true);
     }, []);
 
     const resetPagination = () => {
-        setPagination(previousPagination => {
+        setPagination((previousPagination) => {
             return {
                 ...previousPagination,
                 pageNumber: 1,
-                query: ''
+                query: '',
             };
         });
     };
 
-    const formatNumber = number => {
+    const formatNumber = (number) => {
         return Math.abs(number) > 999 ? numeral(number).format('0.0a') : number;
     };
 
     const handleContentToggle = () => {
-        setShowContent(previousShowContent => !previousShowContent);
+        setShowContent((previousShowContent) => !previousShowContent);
     };
 
-    const renderContentToggle = () => {
-        if (contentType === 'link') return;
-        return (
-            <button onClick={handleContentToggle} className="content-toggle">
-                {showContent ? <>&times;</> : <>+</>}
-            </button>
-        );
+    const renderContentButton = () => {
+        if (contentType === 'none') return;
+        if (contentType === 'link') {
+            return (
+                <a
+                    className="content-button"
+                    href={post.data.url}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                >
+                    <ExternalLinkSVG />
+                </a>
+            );
+        } else {
+            return (
+                <button onClick={handleContentToggle} className="content-toggle">
+                    {showContent ? <>&times;</> : <>+</>}
+                </button>
+            );
+        }
     };
 
     const renderTimeAgo = () => {
@@ -89,7 +104,7 @@ const Post = ({ post, detailed }) => {
         );
     };
 
-    // Audio not working
+    // Audio not working for most vidoes
     const handleShowContent = () => {
         if (!showContent) return;
         if (contentType === 'text') {
@@ -153,7 +168,7 @@ const Post = ({ post, detailed }) => {
         <div className="post">
             <div className="post-left">
                 <div className="score">{formatNumber(post.data.score)}</div>
-                {renderContentToggle()}
+                {renderContentButton()}
             </div>
             <div className="post-right">
                 {renderTagline()}

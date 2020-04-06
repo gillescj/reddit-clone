@@ -14,9 +14,9 @@
             font-weight: bold;
             text-align: center;
         }
-        .content-toggle {
+        .content-toggle,
+        .content-button {
             display: flex;
-            padding: 0.1rem 0.4rem 0.1rem 0.4rem;
             margin-top: 0.2rem;
             font-size: larger;
             font-weight: bold;
@@ -24,6 +24,10 @@
             border-radius: 0.2rem;
             cursor: pointer;
             outline: none;
+            width: 100%;
+            min-height: 2rem;
+            min-width: 2rem;
+            justify-content: center;
         }
     }
     .post-right {
