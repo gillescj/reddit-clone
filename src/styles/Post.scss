@@ -55,12 +55,21 @@
         }
 
         .flat-list {
-            color: #787c7e;
-            font-weight: 900;
+            * {
+                font-weight: 900;
+                font-size: small;
+                margin-right: 0.25rem;
+            }
+
             .comments {
                 text-decoration: none;
                 color: #787c7e;
-                font-size: small;
+            }
+            .nsfw {
+                color: #b61712;
+                padding: 0.1rem;
+                border: solid #b61712 1px;
+                border-radius: 0.1rem;
             }
         }
         .main-content-container {

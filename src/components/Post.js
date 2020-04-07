@@ -104,6 +104,35 @@ const Post = ({ post, detailed }) => {
         );
     };
 
+    const renderTitle = () => {
+        if (detailed) {
+            return <h3 className="title">{post.data.title}</h3>;
+        } else {
+            return (
+                <Link to={{ pathname: `/p/${post.data.id}` }} className="title-link">
+                    <h3 className="title">{post.data.title}</h3>
+                </Link>
+            );
+        }
+    };
+
+    const renderFlatList = () => {
+        return (
+            <div className="flat-list">
+                {post.data.over_18 ? <span className="nsfw">nsfw</span> : null}
+                {detailed ? (
+                    <span className="comments">
+                        {formatNumber(post.data.num_comments)} Comments{' '}
+                    </span>
+                ) : (
+                    <Link to={{ pathname: `/p/${post.data.id}` }} className="comments">
+                        {formatNumber(post.data.num_comments)} Comments{' '}
+                    </Link>
+                )}
+            </div>
+        );
+    };
+
     // Audio not working for most vidoes
     const handleShowContent = () => {
         if (!showContent) return;
@@ -172,29 +201,10 @@ const Post = ({ post, detailed }) => {
             </div>
             <div className="post-right">
                 {renderTagline()}
-                {detailed ? (
-                    <h3 className="title">{post.data.title}</h3>
-                ) : (
-                    <Link to={{ pathname: `/p/${post.data.id}` }} className="title-link">
-                        <h3 className="title">{post.data.title}</h3>
-                    </Link>
-                )}
+                {renderTitle()}
                 <div className="main-content-container">
                     <div className="main-content">{handleShowContent()}</div>
-                    <div className="flat-list">
-                        {detailed ? (
-                            <span className="comments">
-                                {formatNumber(post.data.num_comments)} Comments{' '}
-                            </span>
-                        ) : (
-                            <Link
-                                to={{ pathname: `/p/${post.data.id}` }}
-                                className="comments"
-                            >
-                                {formatNumber(post.data.num_comments)} Comments{' '}
-                            </Link>
-                        )}
-                    </div>
+                    {renderFlatList()}
                 </div>
             </div>
         </div>
