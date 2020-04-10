@@ -20,14 +20,14 @@ const MainContainer = () => {
         url,
         setUrl,
         loading,
-        setLoading
+        setLoading,
     } = useContext(StateContext);
 
     useEffect(() => {
-        setSettings(previousSettings => {
+        setSettings((previousSettings) => {
             return {
                 ...previousSettings,
-                page: ''
+                page: '',
             };
         });
     }, []);
@@ -47,14 +47,14 @@ const MainContainer = () => {
             const response = await reddit.get(url);
             console.log(response);
 
-            setPagination(previousPagination => {
+            setPagination((previousPagination) => {
                 return {
                     ...previousPagination,
                     before: response.data.data.children[0].data.name,
                     after:
                         response.data.data.children[
                             response.data.data.children.length - 1
-                        ].data.name
+                        ].data.name,
                 };
             });
 
@@ -72,8 +72,13 @@ const MainContainer = () => {
                 <>
                     <Switch>
                         <Route path="/" exact component={Home} />
-                        <Route path="/r/:subreddit" component={Subreddit} />
-                        <Route path="/p/:postId" component={PostDetail} />
+                        <Switch>
+                            <Route path="/r/:subreddit" exact component={Subreddit} />
+                            <Route
+                                path="/r/:subreddit/p/:postId"
+                                component={PostDetail}
+                            />
+                        </Switch>
                     </Switch>
                     <ExtraInfo />
                 </>

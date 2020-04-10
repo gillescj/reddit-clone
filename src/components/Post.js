@@ -109,7 +109,10 @@ const Post = ({ post, detailed }) => {
             return <h3 className="title">{post.data.title}</h3>;
         } else {
             return (
-                <Link to={{ pathname: `/p/${post.data.id}` }} className="title-link">
+                <Link
+                    to={{ pathname: `/r/${post.data.subreddit}/p/${post.data.id}` }}
+                    className="title-link"
+                >
                     <h3 className="title">{post.data.title}</h3>
                 </Link>
             );
@@ -125,7 +128,10 @@ const Post = ({ post, detailed }) => {
                         {formatNumber(post.data.num_comments)} Comments{' '}
                     </span>
                 ) : (
-                    <Link to={{ pathname: `/p/${post.data.id}` }} className="comments">
+                    <Link
+                        to={{ pathname: `/r/${post.data.subreddit}/p/${post.data.id}` }}
+                        className="comments"
+                    >
                         {formatNumber(post.data.num_comments)} Comments{' '}
                     </Link>
                 )}
