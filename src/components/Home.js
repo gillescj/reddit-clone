@@ -9,17 +9,17 @@ const Home = () => {
     );
 
     useEffect(() => {
-        setSettings(previousSettings => {
+        setSettings((previousSettings) => {
             return {
                 ...previousSettings,
-                page: ''
+                page: '',
             };
         });
-        const homeUrl = `${settings.page}${settings.orderBy}.json?limit=${settings.limit}&${pagination.query}&g=GLOBAL`;
+        const homeUrl = `/${settings.orderBy}.json?limit=${settings.limit}&${pagination.query}&g=GLOBAL`;
         setUrl(homeUrl);
     }, []);
 
-    return <div>{!loading ? <PostList /> : 'Loading...'}</div>;
+    return <div className="home">{!loading ? <PostList /> : 'Loading...'}</div>;
 };
 
 export default Home;
