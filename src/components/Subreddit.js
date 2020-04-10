@@ -9,17 +9,18 @@ const Subreddit = ({ match }) => {
     );
 
     useEffect(() => {
-        setSettings(previousSettings => {
+        setSettings((previousSettings) => {
             return {
                 ...previousSettings,
-                page: `r/${match.params.subreddit}/`
+                page: `r/${match.params.subreddit}/`,
+                subreddit: match.params.subreddit,
             };
         });
         const subredditUrl = `r/${match.params.subreddit}/${settings.orderBy}.json?limit=${settings.limit}&${pagination.query}&g=GLOBAL`;
         setUrl(subredditUrl);
     }, []);
 
-    return <div>{!loading ? <PostList /> : 'Loading...'}</div>;
+    return <div className="subreddit">{!loading ? <PostList /> : 'Loading...'}</div>;
 };
 
 export default Subreddit;
