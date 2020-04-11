@@ -1,5 +1,5 @@
 import axios from 'axios';
 
 export default axios.create({
-    baseURL: 'https://cors-anywhere.herokuapp.com/https://reddit.com/'
+    baseURL: 'https://gillescj-cors-anywhere.herokuapp.com/https://reddit.com/',
 });
