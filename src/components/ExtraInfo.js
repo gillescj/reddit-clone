@@ -1,12 +1,50 @@
 import '../styles/ExtraInfo.scss';
+import ReactHtmlParser from 'react-html-parser';
 
-import React from 'react';
+import React, { useContext, useEffect, useState } from 'react';
+import reddit from '../apis/reddit';
+import StateContext from './StateContext';
 
 const ExtraInfo = () => {
-    // https://www.reddit.com/subreddits/popular.json?limit=10
-    return (
-        <div className="extra-info">
-            <h3 className="extra-info-title">Extra Info</h3>
+    const { settings } = useContext(StateContext);
+    const [extraInfo, setExtraInfo] = useState();
+
+    useEffect(() => {
+        let isMounted = true;
+        let infoUrl;
+
+        const fetchData = async () => {
+            console.log(settings);
+            if (settings.subreddit === '') {
+                infoUrl = 'subreddits/popular.json?limit=10';
+            } else {
+                infoUrl = `r/${settings.subreddit}/about.json`;
+            }
+            const response = await reddit.get(infoUrl);
+            if (isMounted) {
+                setExtraInfo(response.data);
+            }
+        };
+
+        fetchData();
+
+        return () => {
+            isMounted = false;
+        };
+    }, [settings.subreddit]);
+
+    const renderTitle = () => {
+        if (extraInfo) {
+            if (extraInfo.data.children) {
+                return <h3 className="extra-info-title">Top Subreddits Today</h3>;
+            } else if (extraInfo.data.title) {
+                return <h3 className="extra-info-title">{extraInfo.data.title}</h3>;
+            }
+        }
+    };
+
+    const renderContent = () => {
+        return (
             <div className="extra-info-content">
                 <p>
                     Lorem ipsum, dolor sit amet consectetur adipisicing elit. Accusantium
@@ -19,6 +57,24 @@ const ExtraInfo = () => {
                     maiores aspernatur assumenda ducimus recusandae odio, repudiandae,
                     eaque veniam ullam quo voluptate adipisci corrupti libero.
                 </p>
+            </div>
+        );
+    };
+
+    return (
+        <div className="extra-info">
+            {renderTitle()}
+            {renderContent()}
+            <div className="attribution">
+                Made possible with the{' '}
+                <a
+                    href="https://reddit.com/dev/api"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="reddit-api-link"
+                >
+                    Reddit API
+                </a>
             </div>
         </div>
     );

@@ -1,8 +1,11 @@
+import '../styles/PostDetail.scss';
+
 import React, { useState, useEffect, useContext } from 'react';
 import StateContext from './StateContext';
 import reddit from '../apis/reddit';
 import Post from '../components/Post';
 import CommentList from './CommentList';
+import ExtraInfo from './ExtraInfo';
 
 const PostDetail = ({ match }) => {
     const { setSettings } = useContext(StateContext);
@@ -37,8 +40,11 @@ const PostDetail = ({ match }) => {
 
     return (
         <div className="post-detail">
-            {renderPost()}
-            <CommentList comments={comments} />
+            <main className="post-detail-main">
+                {renderPost()}
+                <CommentList comments={comments} />
+            </main>
+            <ExtraInfo />
         </div>
     );
 };

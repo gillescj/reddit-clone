@@ -42,10 +42,8 @@ const MainContainer = () => {
         window.scrollTo(0, 0);
         const fetchData = async () => {
             setLoading(true);
-            console.log(url);
 
             const response = await reddit.get(url);
-            console.log(response);
 
             setPagination((previousPagination) => {
                 return {
@@ -80,7 +78,6 @@ const MainContainer = () => {
                             />
                         </Switch>
                     </Switch>
-                    <ExtraInfo />
                 </>
             )}
         </main>
