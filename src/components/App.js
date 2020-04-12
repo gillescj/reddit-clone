@@ -14,7 +14,12 @@ const App = () => {
         after: null,
         query: '',
     });
-    const [settings, setSettings] = useState({ page: '', orderBy: 'hot', limit: 25 });
+    const [settings, setSettings] = useState({
+        page: '',
+        subreddit: '',
+        orderBy: 'hot',
+        limit: 25,
+    });
     const [url, setUrl] = useState(
         `${settings.page}${settings.orderBy}.json?limit=${settings.limit}&${pagination.query}&g=GLOBAL`
     );
