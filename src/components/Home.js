@@ -29,7 +29,7 @@ const Home = () => {
             ) : (
                 <>
                     <PostList />
-                    <ExtraInfo />
+                    <ExtraInfo infoType="home" />
                 </>
             )}
         </div>

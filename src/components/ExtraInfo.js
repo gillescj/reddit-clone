@@ -2,10 +2,11 @@ import '../styles/ExtraInfo.scss';
 import ReactHtmlParser from 'react-html-parser';
 
 import React, { useContext, useEffect, useState } from 'react';
+import { Link } from 'react-router-dom';
 import reddit from '../apis/reddit';
 import StateContext from './StateContext';
 
-const ExtraInfo = () => {
+const ExtraInfo = ({ infoType }) => {
     const { settings } = useContext(StateContext);
     const [extraInfo, setExtraInfo] = useState();
 
@@ -15,10 +16,11 @@ const ExtraInfo = () => {
 
         const fetchData = async () => {
             console.log(settings);
-            if (settings.subreddit === '') {
+            if (infoType === 'home') {
                 infoUrl = 'subreddits/popular.json?limit=10';
             } else {
                 infoUrl = `r/${settings.subreddit}/about.json`;
+                console.log(infoUrl);
             }
             const response = await reddit.get(infoUrl);
             if (isMounted) {
@@ -34,31 +36,32 @@ const ExtraInfo = () => {
     }, [settings.subreddit]);
 
     const renderTitle = () => {
-        if (extraInfo) {
-            if (extraInfo.data.children) {
-                return <h3 className="extra-info-title">Top Subreddits Today</h3>;
-            } else if (extraInfo.data.title) {
-                return <h3 className="extra-info-title">{extraInfo.data.title}</h3>;
-            }
+        if (!extraInfo) return;
+        if (infoType === 'home') {
+            return <h3 className="extra-info-title">Top Subreddits Today</h3>;
+        } else {
+            return <h3 className="extra-info-title">{extraInfo.data.display_name}</h3>;
         }
     };
 
     const renderContent = () => {
-        return (
-            <div className="extra-info-content">
-                <p>
-                    Lorem ipsum, dolor sit amet consectetur adipisicing elit. Accusantium
-                    iste laborum deleniti veniam sapiente quis temporibus quae rerum eos,
-                    excepturi doloremque eveniet fugit minima! Eos ratione dolorem eveniet
-                    unde aut eum voluptate ab? Dolores, suscipit velit! Accusamus, quasi.
-                    Sit quia fugiat, esse veritatis dolorem cupiditate ratione ducimus
-                    fuga ea doloremque laboriosam repellat rem nisi porro voluptas
-                    deserunt dolor labore saepe tempore voluptatem animi! Debitis dolore
-                    maiores aspernatur assumenda ducimus recusandae odio, repudiandae,
-                    eaque veniam ullam quo voluptate adipisci corrupti libero.
-                </p>
-            </div>
-        );
+        if (!extraInfo) return;
+        let renderedContent;
+        if (infoType === 'home') {
+            const topSubredditList = extraInfo.data.children.map((subreddit) => {
+                return (
+                    <div key={subreddit.data.display_name}>
+                        <Link to={`/r/${subreddit.data.display_name}`.toLowerCase()}>
+                            {subreddit.data.display_name}
+                        </Link>
+                    </div>
+                );
+            });
+            renderedContent = <div>{topSubredditList}</div>;
+        } else {
+            renderedContent = <div>{extraInfo.data.public_description}</div>;
+        }
+        return <div className="extra-info-content">{renderedContent}</div>;
     };
 
     return (

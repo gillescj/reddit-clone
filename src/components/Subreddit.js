@@ -29,7 +29,7 @@ const Subreddit = ({ match }) => {
             ) : (
                 <>
                     <PostList />
-                    <ExtraInfo />
+                    <ExtraInfo infoType="subreddit" />
                 </>
             )}
         </div>

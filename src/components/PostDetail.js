@@ -13,6 +13,7 @@ const PostDetail = ({ match }) => {
     const [post, setPost] = useState();
     const [comments, setComments] = useState();
     const [postUrl, setpostUrl] = useState(`comments/${match.params.postId}.json`);
+    const [isLoading, setIsLoading] = useState(true);
 
     useEffect(() => {
         setSettings((previousSettings) => {
@@ -31,6 +32,7 @@ const PostDetail = ({ match }) => {
             setComments(response.data[1].data.children);
         };
         fetchData();
+        setIsLoading(false);
     }, []);
 
     const renderPost = () => {
@@ -40,11 +42,17 @@ const PostDetail = ({ match }) => {
 
     return (
         <div className="post-detail">
-            <main className="post-detail-main">
-                {renderPost()}
-                <CommentList comments={comments} />
-            </main>
-            <ExtraInfo />
+            {isLoading ? (
+                'Loading...'
+            ) : (
+                <>
+                    <main className="post-detail-main">
+                        {renderPost()}
+                        <CommentList comments={comments} />
+                    </main>
+                    <ExtraInfo infoType="subreddit" />
+                </>
+            )}
         </div>
     );
 };
