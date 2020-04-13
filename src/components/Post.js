@@ -41,6 +41,7 @@ const Post = ({ post, detailed }) => {
             setContentType('none');
         }
         if (detailed) setShowContent(true);
+        // eslint-disable-next-line react-hooks/exhaustive-deps
     }, []);
 
     const resetPagination = () => {
