@@ -106,14 +106,20 @@ const Post = ({ post, detailed }) => {
 
     const renderTitle = () => {
         if (detailed) {
-            return <h3 className="title">{post.data.title}</h3>;
+            return (
+                <h3 className="title">
+                    {ReactHtmlParser(converter.makeHtml(post.data.title))}
+                </h3>
+            );
         } else {
             return (
                 <Link
                     to={{ pathname: `/r/${post.data.subreddit}/p/${post.data.id}` }}
                     className="title-link"
                 >
-                    <h3 className="title">{post.data.title}</h3>
+                    <h3 className="title">
+                        {ReactHtmlParser(converter.makeHtml(post.data.title))}
+                    </h3>
                 </Link>
             );
         }
