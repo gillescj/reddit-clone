@@ -1,5 +1,4 @@
 import '../styles/ExtraInfo.scss';
-import ReactHtmlParser from 'react-html-parser';
 import numeral from 'numeral';
 
 import React, { useContext, useEffect, useState } from 'react';
@@ -18,7 +17,7 @@ const ExtraInfo = ({ infoType }) => {
         const fetchData = async () => {
             console.log(settings);
             if (infoType === 'home') {
-                infoUrl = 'subreddits/popular.json?limit=10';
+                infoUrl = 'subreddits/popular.json?limit=15';
             } else {
                 infoUrl = `r/${settings.subreddit}/about.json`;
                 console.log(infoUrl);
@@ -44,7 +43,7 @@ const ExtraInfo = ({ infoType }) => {
     const renderTitle = () => {
         if (!extraInfo) return;
         if (infoType === 'home') {
-            return <h3 className="extra-info-title">Top Subreddits Today</h3>;
+            return <h3 className="extra-info-title">Growing Subreddits</h3>;
         } else {
             return <h3 className="extra-info-title">{extraInfo.data.display_name}</h3>;
         }
@@ -71,9 +70,11 @@ const ExtraInfo = ({ infoType }) => {
             );
         } else {
             renderedContent = (
-                <div className="subreddit-description">
-                    {extraInfo.data.public_description}
-                </div>
+                <>
+                    <div className="subreddit-user-description">
+                        {extraInfo.data.public_description}
+                    </div>
+                </>
             );
         }
         return <div className="extra-info-content">{renderedContent}</div>;
