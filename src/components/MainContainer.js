@@ -4,14 +4,12 @@ import React, { useContext, useEffect } from 'react';
 import { Switch, Route } from 'react-router-dom';
 import Subreddit from './Subreddit';
 import StateContext from './StateContext';
-import ExtraInfo from './ExtraInfo';
 import Home from './Home';
 import PostDetail from './PostDetail';
 import reddit from '../apis/reddit';
 
 const MainContainer = () => {
     const {
-        posts,
         setPosts,
         pagination,
         setPagination,

@@ -1,5 +1,5 @@
 import '../styles/Subreddit.scss';
-import React, { useState, useContext, useEffect } from 'react';
+import React, { useEffect, useContext } from 'react';
 
 import StateContext from './StateContext';
 import PostList from './PostList';

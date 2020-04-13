@@ -12,7 +12,6 @@ const PostDetail = ({ match }) => {
 
     const [post, setPost] = useState();
     const [comments, setComments] = useState();
-    const [postUrl, setpostUrl] = useState(`comments/${match.params.postId}.json`);
     const [isLoading, setIsLoading] = useState(true);
 
     useEffect(() => {
@@ -27,7 +26,7 @@ const PostDetail = ({ match }) => {
             };
         });
         const fetchData = async () => {
-            const response = await reddit.get(postUrl);
+            const response = await reddit.get(`comments/${match.params.postId}.json`);
             setPost(response.data[0].data.children[0]);
             setComments(response.data[1].data.children);
         };
