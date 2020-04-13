@@ -30,12 +30,14 @@ const MainContainer = () => {
                 page: '',
             };
         });
+        // eslint-disable-next-line react-hooks/exhaustive-deps
     }, []);
 
     useEffect(() => {
         setUrl(
             `${settings.page}${settings.orderBy}.json?limit=${settings.limit}&${pagination.query}&g=GLOBAL`
         );
+        // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [settings.orderBy, settings.limit, pagination.query]);
 
     useEffect(() => {
