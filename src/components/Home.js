@@ -20,6 +20,7 @@ const Home = () => {
         });
         const homeUrl = `/${settings.orderBy}.json?limit=${settings.limit}&${pagination.query}&g=GLOBAL`;
         setUrl(homeUrl);
+        // eslint-disable-next-line react-hooks/exhaustive-deps
     }, []);
 
     return (

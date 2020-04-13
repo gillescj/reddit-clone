@@ -20,6 +20,7 @@ const Subreddit = ({ match }) => {
         });
         const subredditUrl = `r/${match.params.subreddit}/${settings.orderBy}.json?limit=${settings.limit}&${pagination.query}&g=GLOBAL`;
         setUrl(subredditUrl);
+        // eslint-disable-next-line react-hooks/exhaustive-deps
     }, []);
 
     return (

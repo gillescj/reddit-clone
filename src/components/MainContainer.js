@@ -60,6 +60,7 @@ const MainContainer = () => {
             setLoading(false);
         };
         fetchData();
+        // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [url]);
 
     return (
