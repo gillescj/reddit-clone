@@ -1,17 +1,40 @@
 .extra-info {
+    display: grid;
+    grid-gap: 0.5rem;
     margin: 1rem;
     padding: 0.5rem;
     background: white;
     margin: 1rem 0;
     border-radius: 0.2rem;
     height: fit-content;
-    font-size: small;
+    a {
+        text-decoration: none;
+        color: #1c1c1c;
+        font-weight: bold;
+        &:hover {
+            text-decoration: underline;
+        }
+    }
     .extra-info-title {
         font-size: 1rem;
     }
     .extra-info-content {
-        p {
-            font-size: 0.9rem;
+        font-size: 0.8rem;
+        * {
+            font-size: 0.8rem;
+        }
+        .topSubredditList {
+            display: grid;
+            grid-gap: 0.4rem;
+            .subscriberCount {
+                font-size: 0.7rem;
+            }
+        }
+    }
+    .attribution {
+        font-size: small;
+        * {
+            font-size: small;
         }
     }
 }

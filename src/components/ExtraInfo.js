@@ -1,5 +1,6 @@
 import '../styles/ExtraInfo.scss';
 import ReactHtmlParser from 'react-html-parser';
+import numeral from 'numeral';
 
 import React, { useContext, useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
@@ -35,6 +36,10 @@ const ExtraInfo = ({ infoType }) => {
         };
     }, [settings.subreddit]);
 
+    const formatNumber = (number) => {
+        return Math.abs(number) > 999 ? numeral(number).format('0.0a') : number;
+    };
+
     const renderTitle = () => {
         if (!extraInfo) return;
         if (infoType === 'home') {
@@ -48,18 +53,27 @@ const ExtraInfo = ({ infoType }) => {
         if (!extraInfo) return;
         let renderedContent;
         if (infoType === 'home') {
-            const topSubredditList = extraInfo.data.children.map((subreddit) => {
+            const renderedTopSubredditList = extraInfo.data.children.map((subreddit) => {
                 return (
-                    <div key={subreddit.data.display_name}>
+                    <div className="topSubreddit" key={subreddit.data.display_name}>
                         <Link to={`/r/${subreddit.data.display_name}`.toLowerCase()}>
                             {subreddit.data.display_name}
                         </Link>
+                        <div className="subscriberCount">
+                            {formatNumber(subreddit.data.subscribers)} subscribers
+                        </div>
                     </div>
                 );
             });
-            renderedContent = <div>{topSubredditList}</div>;
+            renderedContent = (
+                <div className="topSubredditList">{renderedTopSubredditList}</div>
+            );
         } else {
-            renderedContent = <div>{extraInfo.data.public_description}</div>;
+            renderedContent = (
+                <div className="subreddit-description">
+                    {extraInfo.data.public_description}
+                </div>
+            );
         }
         return <div className="extra-info-content">{renderedContent}</div>;
     };
