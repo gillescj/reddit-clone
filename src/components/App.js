@@ -1,5 +1,3 @@
-import '../styles/App.scss';
-
 import React, { useState, useMemo } from 'react';
 import { HashRouter } from 'react-router-dom';
 import StateContext from './StateContext';
