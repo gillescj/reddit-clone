@@ -9,8 +9,10 @@ import OptionsMenu from './OptionsMenu';
 const PostList = () => {
     const { posts } = useContext(StateContext);
 
-    const renderedPostList = posts.map(post => {
-        return <Post key={post.data.id} post={post} detailed={false} />;
+    const renderedPostList = posts.map((post) => {
+        return (
+            <Post key={`post.data.id-${Math.random()}`} post={post} detailed={false} />
+        );
     });
 
     return (
