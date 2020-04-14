@@ -1,10 +1,12 @@
 import React, { useState, useMemo } from 'react';
 import { HashRouter } from 'react-router-dom';
+import { Helmet } from 'react-helmet';
 import StateContext from './StateContext';
 import Header from './Header';
 import MainContainer from './MainContainer';
 
 const App = () => {
+    const [theme, setTheme] = useState('light');
     const [posts, setPosts] = useState([]);
     const [pagination, setPagination] = useState({
         pageNumber: 1,
@@ -25,6 +27,8 @@ const App = () => {
 
     const state = useMemo(
         () => ({
+            theme,
+            setTheme,
             posts,
             setPosts,
             pagination,
@@ -37,6 +41,8 @@ const App = () => {
             setLoading,
         }),
         [
+            theme,
+            setTheme,
             posts,
             setPosts,
             pagination,
@@ -51,14 +57,19 @@ const App = () => {
     );
 
     return (
-        <StateContext.Provider value={state}>
-            <div className="container">
-                <HashRouter>
-                    <Header />
-                    <MainContainer />
-                </HashRouter>
-            </div>
-        </StateContext.Provider>
+        <>
+            <Helmet>
+                <body data-theme={theme} />
+            </Helmet>
+            <StateContext.Provider value={state}>
+                <div className="container">
+                    <HashRouter>
+                        <Header />
+                        <MainContainer />
+                    </HashRouter>
+                </div>
+            </StateContext.Provider>
+        </>
     );
 };
 

@@ -1,11 +1,12 @@
 import '../styles/ThemeToggle.scss';
 
-import React, { useState } from 'react';
+import React, { useContext } from 'react';
+import StateContext from './StateContext';
 import { ReactComponent as MoonSVG } from '../assets/svgs/moon.svg';
 import { ReactComponent as SunSVG } from '../assets/svgs/sun.svg';
 
 const ThemeToggle = () => {
-    const [theme, setTheme] = useState('light');
+    const { theme, setTheme } = useContext(StateContext);
 
     const handleThemeToggleClick = () => {
         setTheme((previousTheme) => {
