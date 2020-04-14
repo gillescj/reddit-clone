@@ -1,14 +1,16 @@
+@import "../styles/variables.scss";
+
 .header {
     display: grid;
     gap: 1rem;
-    background: white;
+    background: var(--itemBackgroundColour);
     grid-template-columns: auto 1fr auto;
     padding: 1rem;
     .brand {
         font-weight: bold;
         a {
             text-decoration: none;
-            color: #000;
+            color: var(--textColourPrimary);
         }
     }
 }

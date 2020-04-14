@@ -1,0 +1,15 @@
+:root {
+    --backgroundColour: #dae0e6;
+    --itemBackgroundColour: #fff;
+    --commentEvenBackground: #f7f7f8;
+    --textColourPrimary: #222222;
+    --textColourSecondary: #787c7e;
+}
+
+body[data-theme="dark"] {
+    --backgroundColour: #2c2e2f;
+    --itemBackgroundColour: #222425;
+    --commentEvenBackground: #262829;
+    --textColourPrimary: #d3d0cc;
+    --textColourSecondary: #b5b1a8;
+}

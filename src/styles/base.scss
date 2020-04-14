@@ -1,3 +1,5 @@
+@import "../styles/variables.scss";
+
 @font-face {
     font-family: IBMPlexSans;
     src: url(../assets/fonts/IBMPlexSans/IBMPlexSans-Regular.otf);
@@ -15,5 +17,5 @@
 }
 
 body {
-    background: #dae0e6;
+    background: var(--backgroundColour);
 }

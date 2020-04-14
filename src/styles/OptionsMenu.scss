@@ -1,10 +1,12 @@
+@import "../styles/variables.scss";
+
 .options-menu {
     display: grid;
     grid-template-columns: 1fr 1fr;
     padding: 0.5rem;
-    background: white;
-    // margin: 1rem 0;
+    background: var(--itemBackgroundColour);
     border-radius: 0.2rem;
+    color: var(--textColourPrimary);
     .sort-menu-option {
         font-size: 1rem;
         padding: 0 0.3rem;

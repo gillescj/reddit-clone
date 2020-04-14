@@ -1,6 +1,8 @@
+@import "../styles/variables.scss";
+
 .post {
     padding: 0.5rem;
-    background: white;
+    background: var(--itemBackgroundColour);
     margin: 1rem 0;
     border-radius: 0.2rem;
     display: grid;
@@ -13,6 +15,7 @@
             font-size: small;
             font-weight: bold;
             text-align: center;
+            color: var(--textColourPrimary);
         }
         .content-toggle,
         .content-button {
@@ -32,11 +35,11 @@
     }
     .post-right {
         .tagline {
-            color: #787c7e;
+            color: var(--textColourSecondary);
             font-size: small;
             .post-subreddit-link {
                 text-decoration: none;
-                color: #1c1c1c;
+                color: var(--textColourPrimary);
                 font-weight: bold;
                 font-size: small;
                 &:hover {
@@ -48,7 +51,7 @@
             text-decoration: none;
         }
         .title * {
-            color: #222222;
+            color: var(--textColourPrimary);
             font-size: 1rem;
             font-weight: 600;
             padding: 0.2rem 0;
@@ -63,7 +66,7 @@
 
             .comments {
                 text-decoration: none;
-                color: #787c7e;
+                color: var(--textColourSecondary);
             }
             .nsfw {
                 color: #b61712;
@@ -77,6 +80,7 @@
                 * {
                     font-size: 0.9rem;
                     margin-bottom: 0.5rem;
+                    color: var(--textColourPrimary);
                 }
                 ul,
                 ol {

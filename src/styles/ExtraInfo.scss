@@ -1,15 +1,18 @@
+@import "../styles/variables.scss";
+
 .extra-info {
     display: grid;
     grid-gap: 0.5rem;
     margin: 1rem;
     padding: 0.5rem;
-    background: white;
+    background: var(--itemBackgroundColour);
     margin: 1rem 0;
     border-radius: 0.2rem;
     height: fit-content;
+    color: var(--textColourPrimary);
     a {
         text-decoration: none;
-        color: #1c1c1c;
+        color: var(--textColourPrimary);
         font-weight: bold;
         &:hover {
             text-decoration: underline;
@@ -28,6 +31,7 @@
             grid-gap: 0.4rem;
             .subscriberCount {
                 font-size: 0.7rem;
+                color: var(--textColourSecondary);
             }
         }
     }

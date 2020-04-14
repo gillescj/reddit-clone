@@ -1,13 +1,16 @@
+@import "../styles/variables.scss";
+
 .comment {
     padding: 0rem 0.5rem 0rem 1rem;
-    background: white;
+    background: var(--itemBackgroundColour);
     margin: 0.5rem 0;
     border-radius: 0.2rem;
     border: 1px solid #dee5e7;
     border-left: 2px solid #dee5e7;
     word-wrap: break-word;
+    color: var(--textColourPrimary);
     &.even {
-        background: #f7f7f8;
+        background: var(--commentEvenBackground);
     }
     &:hover {
         border-left: 2px solid rgb(127, 188, 233);
@@ -20,7 +23,7 @@
         }
         .comment-author {
             font-weight: bold;
-            color: #1c1c1c;
+            color: var(--textColourPrimary);
         }
     }
     .text-content {
