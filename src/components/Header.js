@@ -8,12 +8,14 @@ import ThemeToggle from './ThemeToggle';
 const Header = () => {
     return (
         <div className="header">
-            <div className="brand">
-                <Link to="/">reddit clone</Link>
+            <div className="header-container">
+                <div className="brand">
+                    <Link to="/">reddit clone</Link>
+                </div>
+                {/* <SearchBar /> */}
+                <div></div>
+                <ThemeToggle />
             </div>
-            {/* <SearchBar /> */}
-            <div></div>
-            <ThemeToggle />
         </div>
     );
 };

@@ -2,15 +2,20 @@
 
 .header {
     display: grid;
-    gap: 1rem;
     background: var(--itemBackgroundColour);
-    grid-template-columns: auto 1fr auto;
+    grid-template-columns: minmax(1rem, 65rem);
+    justify-content: center;
     padding: 1rem;
-    .brand {
-        font-weight: bold;
-        a {
-            text-decoration: none;
-            color: var(--textColourPrimary);
+    .header-container {
+        display: grid;
+        gap: 1rem;
+        grid-template-columns: auto 1fr auto;
+        .brand {
+            font-weight: bold;
+            a {
+                text-decoration: none;
+                color: var(--textColourPrimary);
+            }
         }
     }
 }
