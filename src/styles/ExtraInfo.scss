@@ -42,3 +42,9 @@
         }
     }
 }
+
+@media only screen and (max-width: 50rem) {
+    .extra-info {
+        display: none;
+    }
+}
