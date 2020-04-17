@@ -15,6 +15,11 @@ const PostDetail = ({ match }) => {
     const [isLoading, setIsLoading] = useState(true);
 
     useEffect(() => {
+        console.log('reeeeee', isLoading);
+    });
+
+    useEffect(() => {
+        setIsLoading(true);
         setSettings((previousSettings) => {
             return {
                 ...previousSettings,
@@ -29,9 +34,9 @@ const PostDetail = ({ match }) => {
             const response = await reddit.get(`comments/${match.params.postId}.json`);
             setPost(response.data[0].data.children[0]);
             setComments(response.data[1].data.children);
+            setIsLoading(false);
         };
         fetchData();
-        setIsLoading(false);
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, []);
 
@@ -43,7 +48,7 @@ const PostDetail = ({ match }) => {
     return (
         <div className="post-detail">
             {isLoading ? (
-                'Loading...'
+                'Loading......'
             ) : (
                 <>
                     <main className="post-detail-main">

@@ -7,15 +7,17 @@ import reddit from '../apis/reddit';
 import StateContext from './StateContext';
 
 const ExtraInfo = ({ infoType }) => {
-    const { settings } = useContext(StateContext);
-    const [extraInfo, setExtraInfo] = useState();
+    const { extraInfo, setExtraInfo, settings } = useContext(StateContext);
+    const [isLoading, setIsLoading] = useState(true);
 
     useEffect(() => {
+        setIsLoading(true);
         let isMounted = true;
         let infoUrl;
 
         const fetchData = async () => {
             console.log(settings);
+            console.log(infoType);
             if (infoType === 'home') {
                 infoUrl = 'subreddits/popular.json?limit=15';
             } else {
@@ -25,7 +27,9 @@ const ExtraInfo = ({ infoType }) => {
             const response = await reddit.get(infoUrl);
             if (isMounted) {
                 setExtraInfo(response.data);
+                setIsLoading(false);
             }
+            // setExtraInfo(response.data);
         };
 
         fetchData();
@@ -33,8 +37,7 @@ const ExtraInfo = ({ infoType }) => {
         return () => {
             isMounted = false;
         };
-        // eslint-disable-next-line react-hooks/exhaustive-deps
-    }, [settings.subreddit]);
+    }, [infoType, settings.subreddit]);
 
     const formatNumber = (number) => {
         return Math.abs(number) > 999 ? numeral(number).format('0.0a') : number;
@@ -53,6 +56,7 @@ const ExtraInfo = ({ infoType }) => {
         if (!extraInfo) return;
         let renderedContent;
         if (infoType === 'home') {
+            if (!extraInfo.data.children) return;
             const renderedTopSubredditList = extraInfo.data.children.map((subreddit) => {
                 return (
                     <div className="topSubreddit" key={subreddit.data.display_name}>
@@ -81,21 +85,25 @@ const ExtraInfo = ({ infoType }) => {
     };
 
     return (
-        <div className="extra-info">
-            {renderTitle()}
-            {renderContent()}
-            <div className="attribution">
-                Made possible with the{' '}
-                <a
-                    href="https://reddit.com/dev/api"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="reddit-api-link"
-                >
-                    Reddit API
-                </a>
-            </div>
-        </div>
+        <>
+            {isLoading ? null : (
+                <div className="extra-info">
+                    {renderTitle()}
+                    {renderContent()}
+                    <div className="attribution">
+                        Made possible with the{' '}
+                        <a
+                            href="https://reddit.com/dev/api"
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            className="reddit-api-link"
+                        >
+                            Reddit API
+                        </a>
+                    </div>
+                </div>
+            )}
+        </>
     );
 };
 

@@ -14,6 +14,7 @@ const App = () => {
         after: null,
         query: '',
     });
+    const [extraInfo, setExtraInfo] = useState();
     const [settings, setSettings] = useState({
         page: '',
         subreddit: '',
@@ -33,6 +34,8 @@ const App = () => {
             setPosts,
             pagination,
             setPagination,
+            extraInfo,
+            setExtraInfo,
             settings,
             setSettings,
             url,
@@ -47,6 +50,8 @@ const App = () => {
             setPosts,
             pagination,
             setPagination,
+            extraInfo,
+            setExtraInfo,
             settings,
             setSettings,
             url,
