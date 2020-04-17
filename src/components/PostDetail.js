@@ -15,10 +15,6 @@ const PostDetail = ({ match }) => {
     const [isLoading, setIsLoading] = useState(true);
 
     useEffect(() => {
-        console.log('reeeeee', isLoading);
-    });
-
-    useEffect(() => {
         setIsLoading(true);
         setSettings((previousSettings) => {
             return {

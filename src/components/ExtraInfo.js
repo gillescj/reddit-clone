@@ -16,20 +16,16 @@ const ExtraInfo = ({ infoType }) => {
         let infoUrl;
 
         const fetchData = async () => {
-            console.log(settings);
-            console.log(infoType);
             if (infoType === 'home') {
                 infoUrl = 'subreddits/popular.json?limit=15';
             } else {
                 infoUrl = `r/${settings.subreddit}/about.json`;
-                console.log(infoUrl);
             }
             const response = await reddit.get(infoUrl);
             if (isMounted) {
                 setExtraInfo(response.data);
                 setIsLoading(false);
             }
-            // setExtraInfo(response.data);
         };
 
         fetchData();
