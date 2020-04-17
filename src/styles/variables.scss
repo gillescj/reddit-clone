@@ -4,6 +4,7 @@
     --commentEvenBackground: #f7f7f8;
     --textColourPrimary: #222222;
     --textColourSecondary: #787c7e;
+    --commentBorderColour: #dee5e7;
 }
 
 body[data-theme="dark"] {
@@ -12,4 +13,5 @@ body[data-theme="dark"] {
     --commentEvenBackground: #262829;
     --textColourPrimary: #d3d0cc;
     --textColourSecondary: #b5b1a8;
+    --commentBorderColour: #333333;
 }

@@ -19,11 +19,12 @@
         }
         .content-toggle,
         .content-button {
+            background: var(--backgroundColour);
             display: flex;
             margin-top: 0.2rem;
             font-size: larger;
             font-weight: bold;
-            border: solid rgb(0, 0, 0) 1px;
+            border: solid var(--textColourPrimary) 1px;
             border-radius: 0.2rem;
             cursor: pointer;
             outline: none;
@@ -31,6 +32,10 @@
             min-height: 2rem;
             min-width: 2rem;
             justify-content: center;
+            color: var(--textColourPrimary);
+            svg {
+                fill: var(--textColourPrimary);
+            }
         }
     }
     .post-right {
@@ -77,6 +82,9 @@
         }
         .main-content-container {
             .main-content {
+                a {
+                    color: #0079d3;
+                }
                 * {
                     font-size: 0.9rem;
                     margin-bottom: 0.5rem;
