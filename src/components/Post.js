@@ -118,9 +118,9 @@ const Post = ({ post, detailed }) => {
                     to={{ pathname: `/r/${post.data.subreddit}/p/${post.data.id}` }}
                     className="title-link"
                 >
-                    <h3 className="title">
+                    <div className="title">
                         {ReactHtmlParser(converter.makeHtml(post.data.title))}
-                    </h3>
+                    </div>
                 </Link>
             );
         }
