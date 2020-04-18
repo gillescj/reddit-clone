@@ -24,7 +24,7 @@ const App = () => {
     const [url, setUrl] = useState(
         `${settings.page}${settings.orderBy}.json?limit=${settings.limit}&${pagination.query}&g=GLOBAL`
     );
-    const [loading, setLoading] = useState(true);
+    // const [loading, setLoading] = useState(true);
 
     const state = useMemo(
         () => ({
@@ -40,8 +40,8 @@ const App = () => {
             setSettings,
             url,
             setUrl,
-            loading,
-            setLoading,
+            // loading,
+            // setLoading,
         }),
         [
             theme,
@@ -56,8 +56,8 @@ const App = () => {
             setSettings,
             url,
             setUrl,
-            loading,
-            setLoading,
+            // loading,
+            // setLoading,
         ]
     );
 

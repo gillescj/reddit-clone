@@ -1,6 +1,6 @@
 import '../styles/MainContainer.scss';
 
-import React, { useContext, useEffect } from 'react';
+import React, { useState, useContext, useEffect } from 'react';
 import { Switch, Route } from 'react-router-dom';
 import Subreddit from './Subreddit';
 import StateContext from './StateContext';
@@ -17,32 +17,34 @@ const MainContainer = () => {
         setSettings,
         url,
         setUrl,
-        loading,
-        setLoading,
     } = useContext(StateContext);
+    const [isLoading, setIsLoading] = useState(true);
 
     useEffect(() => {
+        setIsLoading(true);
         setSettings((previousSettings) => {
             return {
                 ...previousSettings,
                 page: '',
             };
         });
+        setIsLoading(false);
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, []);
 
     useEffect(() => {
+        setIsLoading(true);
         setUrl(
             `${settings.page}${settings.orderBy}.json?limit=${settings.limit}&${pagination.query}&g=GLOBAL`
         );
         // eslint-disable-next-line react-hooks/exhaustive-deps
-    }, [settings.orderBy, settings.limit, pagination.query]);
+        setIsLoading(false);
+    }, [settings.orderBy, settings.limit, settings.page, pagination.query]);
 
     useEffect(() => {
         window.scrollTo(0, 0);
+        setIsLoading(true);
         const fetchData = async () => {
-            setLoading(true);
-
             const response = await reddit.get(url);
 
             setPagination((previousPagination) => {
@@ -57,15 +59,14 @@ const MainContainer = () => {
             });
 
             setPosts(response.data.data.children);
-            setLoading(false);
+            setIsLoading(false);
         };
         fetchData();
-        // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [url]);
 
     return (
         <main className="main-container">
-            {loading ? (
+            {isLoading ? (
                 <div>Loading...</div>
             ) : (
                 <>
