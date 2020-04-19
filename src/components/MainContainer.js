@@ -17,34 +17,32 @@ const MainContainer = () => {
         setSettings,
         url,
         setUrl,
+        loading,
+        setLoading,
     } = useContext(StateContext);
-    const [isLoading, setIsLoading] = useState(true);
+    // const [isLoading, setIsLoading] = useState(true);
 
     useEffect(() => {
-        setIsLoading(true);
         setSettings((previousSettings) => {
             return {
                 ...previousSettings,
                 page: '',
             };
         });
-        setIsLoading(false);
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, []);
 
     useEffect(() => {
-        setIsLoading(true);
         setUrl(
             `${settings.page}${settings.orderBy}.json?limit=${settings.limit}&${pagination.query}&g=GLOBAL`
         );
         // eslint-disable-next-line react-hooks/exhaustive-deps
-        setIsLoading(false);
-    }, [settings.orderBy, settings.limit, settings.page, pagination.query]);
+    }, [settings.orderBy, settings.limit, pagination.query]);
 
     useEffect(() => {
         window.scrollTo(0, 0);
-        setIsLoading(true);
         const fetchData = async () => {
+            setLoading(true);
             const response = await reddit.get(url);
 
             setPagination((previousPagination) => {
@@ -59,14 +57,14 @@ const MainContainer = () => {
             });
 
             setPosts(response.data.data.children);
-            setIsLoading(false);
+            setLoading(false);
         };
         fetchData();
     }, [url]);
 
     return (
         <main className="main-container">
-            {isLoading ? (
+            {loading ? (
                 <div>Loading...</div>
             ) : (
                 <>
