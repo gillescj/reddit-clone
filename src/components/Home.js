@@ -1,16 +1,15 @@
 import '../styles/Home.scss';
 
-import React, { useState, useContext, useEffect } from 'react';
+import React, { useContext, useEffect } from 'react';
 
 import StateContext from './StateContext';
 import PostList from './PostList';
 import ExtraInfo from './ExtraInfo';
 const Home = () => {
-    const { settings, setSettings, pagination, setUrl } = useContext(StateContext);
-    const [isLoading, setIsLoading] = useState(true);
+    const { setSettings, loading, setLoading } = useContext(StateContext);
 
     useEffect(() => {
-        setIsLoading(true);
+        setLoading(true);
         setSettings((previousSettings) => {
             return {
                 ...previousSettings,
@@ -18,15 +17,14 @@ const Home = () => {
                 subreddit: '',
             };
         });
-        const homeUrl = `/${settings.orderBy}.json?limit=${settings.limit}&${pagination.query}&g=GLOBAL`;
-        setUrl(homeUrl);
-        setIsLoading(false);
+
+        setLoading(false);
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, []);
 
     return (
         <div className="home">
-            {isLoading ? (
+            {loading ? (
                 'Loading...'
             ) : (
                 <>

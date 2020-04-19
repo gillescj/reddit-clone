@@ -33,6 +33,7 @@ const ExtraInfo = ({ infoType }) => {
         return () => {
             isMounted = false;
         };
+        // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [infoType, settings.subreddit]);
 
     const formatNumber = (number) => {

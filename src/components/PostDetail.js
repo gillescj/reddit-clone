@@ -28,6 +28,7 @@ const PostDetail = ({ match }) => {
         });
         const fetchData = async () => {
             const response = await reddit.get(`comments/${match.params.postId}.json`);
+
             setPost(response.data[0].data.children[0]);
             setComments(response.data[1].data.children);
             setIsLoading(false);

@@ -1,6 +1,6 @@
 import '../styles/MainContainer.scss';
 
-import React, { useState, useContext, useEffect } from 'react';
+import React, { useContext, useEffect } from 'react';
 import { Switch, Route } from 'react-router-dom';
 import Subreddit from './Subreddit';
 import StateContext from './StateContext';
@@ -32,11 +32,12 @@ const MainContainer = () => {
     }, []);
 
     useEffect(() => {
+        if (settings.page.includes('/p/')) return;
         setUrl(
             `${settings.page}${settings.orderBy}.json?limit=${settings.limit}&${pagination.query}&g=GLOBAL`
         );
         // eslint-disable-next-line react-hooks/exhaustive-deps
-    }, [settings.orderBy, settings.limit, pagination.query]);
+    }, [settings.orderBy, settings.limit, pagination.query, settings.subreddit]);
 
     useEffect(() => {
         window.scrollTo(0, 0);
@@ -59,6 +60,7 @@ const MainContainer = () => {
             setLoading(false);
         };
         fetchData();
+        // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [url]);
 
     return (
