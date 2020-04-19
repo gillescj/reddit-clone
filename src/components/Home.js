@@ -24,14 +24,8 @@ const Home = () => {
 
     return (
         <div className="home">
-            {loading ? (
-                'Loading...'
-            ) : (
-                <>
-                    <PostList />
-                    <ExtraInfo infoType="home" />
-                </>
-            )}
+            <PostList />
+            <ExtraInfo infoType="home" />
         </div>
     );
 };

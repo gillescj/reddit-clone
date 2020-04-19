@@ -25,14 +25,8 @@ const Subreddit = ({ match }) => {
 
     return (
         <div className="subreddit">
-            {loading ? (
-                'Loading...'
-            ) : (
-                <>
-                    <PostList />
-                    <ExtraInfo infoType="subreddit" />
-                </>
-            )}
+            <PostList />
+            <ExtraInfo infoType="subreddit" />
         </div>
     );
 };

@@ -7,6 +7,7 @@ import StateContext from './StateContext';
 import Home from './Home';
 import PostDetail from './PostDetail';
 import reddit from '../apis/reddit';
+import Loader from './Loader';
 
 const MainContainer = () => {
     const {
@@ -66,7 +67,7 @@ const MainContainer = () => {
     return (
         <main className="main-container">
             {loading ? (
-                <div>Loading...</div>
+                <Loader />
             ) : (
                 <>
                     <Switch>
