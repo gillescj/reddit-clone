@@ -7,7 +7,7 @@ import reddit from '../apis/reddit';
 import StateContext from './StateContext';
 
 const ExtraInfo = ({ infoType }) => {
-    const { extraInfo, setExtraInfo, settings } = useContext(StateContext);
+    const { extraInfo, setExtraInfo, settings, setPagination } = useContext(StateContext);
     const [isLoading, setIsLoading] = useState(true);
 
     useEffect(() => {
@@ -40,6 +40,16 @@ const ExtraInfo = ({ infoType }) => {
         return Math.abs(number) > 999 ? numeral(number).format('0.0a') : number;
     };
 
+    const resetPagination = () => {
+        setPagination((previousPagination) => {
+            return {
+                ...previousPagination,
+                pageNumber: 1,
+                query: '',
+            };
+        });
+    };
+
     const renderTitle = () => {
         if (!extraInfo) return;
         if (infoType === 'home') {
@@ -57,7 +67,10 @@ const ExtraInfo = ({ infoType }) => {
             const renderedTopSubredditList = extraInfo.data.children.map((subreddit) => {
                 return (
                     <div className="topSubreddit" key={subreddit.data.display_name}>
-                        <Link to={`/r/${subreddit.data.display_name}`.toLowerCase()}>
+                        <Link
+                            to={`/r/${subreddit.data.display_name}`.toLowerCase()}
+                            onClick={() => resetPagination()}
+                        >
                             {subreddit.data.display_name}
                         </Link>
                         <div className="subscriberCount">
