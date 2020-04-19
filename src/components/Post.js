@@ -94,7 +94,7 @@ const Post = ({ post, detailed }) => {
         return (
             <p className="tagline">
                 <Link
-                    to={{ pathname: `/r/${post.data.subreddit}` }}
+                    to={{ pathname: `/r/${post.data.subreddit}`.toLowerCase() }}
                     className="post-subreddit-link"
                     onClick={() => resetPagination()}
                 >
