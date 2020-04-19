@@ -20,7 +20,6 @@ const MainContainer = () => {
         loading,
         setLoading,
     } = useContext(StateContext);
-    // const [isLoading, setIsLoading] = useState(true);
 
     useEffect(() => {
         setSettings((previousSettings) => {
