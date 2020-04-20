@@ -6,9 +6,7 @@ import PostList from './PostList';
 import ExtraInfo from './ExtraInfo';
 
 const Subreddit = ({ match }) => {
-    const { settings, setSettings, pagination, loading, setUrl } = useContext(
-        StateContext
-    );
+    const { settings, setSettings, pagination, setUrl } = useContext(StateContext);
 
     useEffect(() => {
         setSettings((previousSettings) => {

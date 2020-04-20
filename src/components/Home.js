@@ -6,7 +6,7 @@ import StateContext from './StateContext';
 import PostList from './PostList';
 import ExtraInfo from './ExtraInfo';
 const Home = () => {
-    const { setSettings, loading, setLoading } = useContext(StateContext);
+    const { setSettings, setLoading } = useContext(StateContext);
 
     useEffect(() => {
         setLoading(true);
