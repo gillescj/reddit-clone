@@ -2,15 +2,19 @@
 
 .options-menu {
     display: grid;
-    grid-template-columns: 1fr 1fr;
+    grid-template-columns: 1fr auto;
     padding: 0.5rem;
     background: var(--itemBackgroundColour);
     border-radius: 0.2rem;
     color: var(--textColourPrimary);
-    .sort-menu-option {
-        font-size: 1rem;
-        padding: 0 0.3rem;
-        cursor: pointer;
+    .sort-menu {
+        display: flex;
+        flex-wrap: wrap;
+        .sort-menu-option {
+            font-size: 1rem;
+            padding: 0 0.3rem;
+            cursor: pointer;
+        }
     }
     .sort-menu-option-selected {
         color: #0079d3;
