@@ -19,7 +19,7 @@ const App = () => {
         page: '',
         subreddit: '',
         orderBy: 'hot',
-        limit: 25,
+        limit: 10,
     });
     const [url, setUrl] = useState(
         `${settings.page}${settings.orderBy}.json?limit=${settings.limit}&${pagination.query}&g=GLOBAL`
