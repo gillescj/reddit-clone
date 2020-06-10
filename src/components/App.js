@@ -1,4 +1,4 @@
-import React, { useState, useMemo } from 'react';
+import React, { useState } from 'react';
 import { HashRouter } from 'react-router-dom';
 import { Helmet } from 'react-helmet';
 import StateContext from './StateContext';
@@ -26,40 +26,22 @@ const App = () => {
     );
     const [loading, setLoading] = useState(true);
 
-    const state = useMemo(
-        () => ({
-            theme,
-            setTheme,
-            posts,
-            setPosts,
-            pagination,
-            setPagination,
-            extraInfo,
-            setExtraInfo,
-            settings,
-            setSettings,
-            url,
-            setUrl,
-            loading,
-            setLoading,
-        }),
-        [
-            theme,
-            setTheme,
-            posts,
-            setPosts,
-            pagination,
-            setPagination,
-            extraInfo,
-            setExtraInfo,
-            settings,
-            setSettings,
-            url,
-            setUrl,
-            loading,
-            setLoading,
-        ]
-    );
+    const state = {
+        theme,
+        setTheme,
+        posts,
+        setPosts,
+        pagination,
+        setPagination,
+        extraInfo,
+        setExtraInfo,
+        settings,
+        setSettings,
+        url,
+        setUrl,
+        loading,
+        setLoading,
+    };
 
     return (
         <>
