@@ -1,10 +1,11 @@
-.search-form {
+.search-bar {
     input {
         font-size: 0.75rem;
-        border: #f6f7f8 1px solid;
-        border-radius: 0.5rem;
+        border: #f6f7f8 2px solid;
+        border-radius: 0.2rem;
         background: #f6f7f8;
         padding: 0.3rem;
+        border-color: hsl(206, 20%, 70%);
         &:focus {
             outline: none;
             border-color: #0079d3;
