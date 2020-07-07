@@ -6,34 +6,34 @@ import StateContext from './StateContext';
 const OptionsMenu = () => {
     const { settings, setSettings, setPagination } = useContext(StateContext);
 
-    const handleSortMenuOptionClick = option => {
-        setPagination(previousPagination => {
+    const handleSortMenuOptionClick = (option) => {
+        setPagination((previousPagination) => {
             return {
                 ...previousPagination,
                 pageNumber: 1,
-                query: ''
+                query: '',
             };
         });
-        setSettings(previousSettings => {
+        setSettings((previousSettings) => {
             return {
                 ...previousSettings,
-                orderBy: option
+                orderBy: option,
             };
         });
     };
 
-    const handleSortMenuLimitClick = limitNumber => {
-        setPagination(previousPagination => {
+    const handleSortMenuLimitClick = (limitNumber) => {
+        setPagination((previousPagination) => {
             return {
                 ...previousPagination,
                 pageNumber: 1,
-                query: ''
+                query: '',
             };
         });
-        setSettings(previousSettings => {
+        setSettings((previousSettings) => {
             return {
                 ...previousSettings,
-                limit: limitNumber
+                limit: limitNumber,
             };
         });
     };
@@ -49,14 +49,16 @@ const OptionsMenu = () => {
                 >
                     hot
                 </span>
-                <span
-                    onClick={() => handleSortMenuOptionClick('new')}
-                    className={`sort-menu-option ${
-                        settings.orderBy === 'new' ? 'sort-menu-option-selected' : ''
-                    }`}
-                >
-                    new
-                </span>
+                {settings.page === '' ? null : (
+                    <span
+                        onClick={() => handleSortMenuOptionClick('new')}
+                        className={`sort-menu-option ${
+                            settings.orderBy === 'new' ? 'sort-menu-option-selected' : ''
+                        }`}
+                    >
+                        new
+                    </span>
+                )}
                 <span
                     onClick={() => handleSortMenuOptionClick('top')}
                     className={`sort-menu-option ${
@@ -78,7 +80,7 @@ const OptionsMenu = () => {
                 limit{' '}
                 <select
                     className="limit-select"
-                    onChange={event => handleSortMenuLimitClick(event.target.value)}
+                    onChange={(event) => handleSortMenuLimitClick(event.target.value)}
                     value={settings.limit}
                 >
                     <option value="10">10</option>

@@ -15,6 +15,10 @@ const Home = () => {
                 ...previousSettings,
                 page: '',
                 subreddit: '',
+                orderBy:
+                    previousSettings.page !== '' && previousSettings.orderBy === 'new'
+                        ? 'hot'
+                        : previousSettings.orderBy,
             };
         });
 
