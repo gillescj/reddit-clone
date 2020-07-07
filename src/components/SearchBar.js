@@ -23,7 +23,7 @@ const SearchForm = () => {
         <form onSubmit={handleFormSubmit} className="search-bar">
             <input
                 type="text"
-                placeholder="Search"
+                placeholder="Search subreddits"
                 className="search-bar-input"
                 value={barValue}
                 onChange={(event) => handleSearchBarChange(event)}
