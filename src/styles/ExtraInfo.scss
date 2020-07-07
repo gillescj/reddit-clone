@@ -17,6 +17,7 @@
         &:hover {
             text-decoration: underline;
         }
+        transition: all 0.7s;
     }
     .extra-info-title {
         font-size: 1rem;
@@ -41,6 +42,7 @@
             font-size: small;
         }
     }
+    transition: all 0.7s;
 }
 
 @media only screen and (max-width: 50rem) {
