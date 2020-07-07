@@ -6,7 +6,7 @@ import Comment from './Comment';
 const CommentList = ({ comments }) => {
     const renderCommentList = () => {
         if (!comments) return;
-        return comments.map(comment => {
+        return comments.slice(0, -1).map((comment) => {
             return <Comment key={comment.data.id} comment={comment} depth="odd" />;
         });
     };
