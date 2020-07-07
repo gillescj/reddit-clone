@@ -1,9 +1,13 @@
 import '../styles/SearchBar.scss';
 
-import React, { useState } from 'react';
+import React, { useState, useContext } from 'react';
+import StateContext from './StateContext';
+import { useHistory } from 'react-router-dom';
 
 const SearchForm = () => {
+    const { setSearchQuery } = useContext(StateContext);
     const [barValue, setBarValue] = useState('');
+    let history = useHistory();
 
     const handleSearchBarChange = (event) => {
         setBarValue(event.target.value);
@@ -11,7 +15,8 @@ const SearchForm = () => {
 
     const handleFormSubmit = (event) => {
         event.preventDefault();
-        alert('Search functionality coming soon.');
+        setSearchQuery(barValue);
+        history.push(`/search/${encodeURIComponent(barValue)}`);
     };
 
     return (
@@ -21,7 +26,7 @@ const SearchForm = () => {
                 placeholder="Search"
                 className="search-bar-input"
                 value={barValue}
-                onChange={handleSearchBarChange}
+                onChange={(event) => handleSearchBarChange(event)}
             />
         </form>
     );
