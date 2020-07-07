@@ -1,15 +1,8 @@
-import React, { useContext, useEffect, useState } from 'react';
+import React, { useContext } from 'react';
 import StateContext from './StateContext';
 
 const SearchResults = () => {
-    const {
-        searchResults,
-        setSearchResults,
-        searchQuery,
-        setSearchQuery,
-        loading,
-        setLoading,
-    } = useContext(StateContext);
+    const { searchResults } = useContext(StateContext);
 
     return (
         <>
