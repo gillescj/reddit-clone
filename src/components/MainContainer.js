@@ -8,6 +8,7 @@ import Home from './Home';
 import PostDetail from './PostDetail';
 import reddit from '../apis/reddit';
 import Loader from './Loader';
+import SearchResults from './SearchResults';
 
 const MainContainer = () => {
     const {
@@ -20,6 +21,8 @@ const MainContainer = () => {
         setUrl,
         loading,
         setLoading,
+        searchQuery,
+        setSearchResults,
     } = useContext(StateContext);
 
     useEffect(() => {
@@ -64,6 +67,18 @@ const MainContainer = () => {
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [url]);
 
+    useEffect(() => {
+        const fetchData = async () => {
+            setLoading(true);
+            const response = await reddit.get(
+                `subreddits/search.json?limit=10&sort=relevance&q=${searchQuery}`
+            );
+            setSearchResults(response.data.data.children);
+            setLoading(false);
+        };
+        fetchData();
+    }, [searchQuery]);
+
     return (
         <main className="main-container">
             {loading ? (
@@ -77,6 +92,10 @@ const MainContainer = () => {
                             <Route
                                 path="/r/:subreddit/p/:postId"
                                 component={PostDetail}
+                            />
+                            <Route
+                                path="/search/:searchString"
+                                component={SearchResults}
                             />
                         </Switch>
                     </Switch>
