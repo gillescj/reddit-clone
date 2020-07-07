@@ -77,7 +77,7 @@ const MainContainer = () => {
             setLoading(false);
         };
         fetchData();
-    }, [searchQuery]);
+    }, [searchQuery, setLoading, setSearchResults]);
 
     return (
         <main className="main-container">
