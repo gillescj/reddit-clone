@@ -13,7 +13,7 @@ const SearchResults = () => {
         if (!searchQuery) {
             setSearchQuery(searchString);
         }
-    }, []);
+    }, [searchQuery, searchString, setSearchQuery]);
 
     return (
         <>
