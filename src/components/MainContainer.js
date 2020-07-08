@@ -76,7 +76,9 @@ const MainContainer = () => {
             setSearchResults(response.data.data.children);
             setLoading(false);
         };
-        fetchData();
+        if (searchQuery) {
+            fetchData();
+        }
     }, [searchQuery, setLoading, setSearchResults]);
 
     return (
