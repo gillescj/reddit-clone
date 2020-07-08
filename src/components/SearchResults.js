@@ -1,18 +1,28 @@
-import React, { useContext } from 'react';
+import '../styles/SearchResults.scss';
+
+import React, { useContext, useEffect } from 'react';
 import StateContext from './StateContext';
+import { useParams } from 'react-router-dom';
+import SearchResultsItemList from './SearchResultsItemList';
 
 const SearchResults = () => {
-    const { searchResults } = useContext(StateContext);
+    const { searchResults, searchQuery, setSearchQuery } = useContext(StateContext);
+    const { searchString } = useParams();
+
+    useEffect(() => {
+        if (!searchQuery) {
+            setSearchQuery(searchString);
+        }
+    }, []);
 
     return (
         <>
-            <div>SearchResults</div>
-            <br />
-            <div>
-                {searchResults.map((result) => {
-                    return <h5 key={result.data.id}>{result.data.title}</h5>;
-                })}
-            </div>
+            {!searchResults ? null : (
+                <div className="search-results">
+                    <h1>Subreddit Search Results</h1>
+                    <SearchResultsItemList searchResults={searchResults} />
+                </div>
+            )}
         </>
     );
 };
