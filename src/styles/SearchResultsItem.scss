@@ -1,0 +1,84 @@
+.search-results-item {
+    padding: 0.5rem 1rem;
+    background: var(--itemBackgroundColour);
+    color: var(--textColourPrimary);
+    border-radius: 0.2rem;
+    display: grid;
+    grid-gap: 0.5rem;
+    grid-template-columns: minmax(2rem, 40rem);
+    word-wrap: break-word;
+    a {
+        text-decoration: none;
+        color: inherit;
+    }
+    .search-item-top {
+        display: grid;
+        grid-gap: 1rem;
+        grid-template-columns: auto 1fr;
+        img {
+            width: 64px;
+            height: 64px;
+            border-radius: 50%;
+        }
+        .search-item-top-right {
+            .search-item-display-name-prefixed {
+                font-size: small;
+                font-weight: bold;
+            }
+            .search-item-title {
+                ul,
+                ol {
+                    list-style-position: inside;
+                    li > * {
+                        &:nth-child(1) {
+                            display: inline;
+                        }
+                    }
+                }
+            }
+        }
+    }
+    .search-item-middle {
+        .search-item-public-description * {
+            font-size: 0.9rem;
+        }
+        .search-item-public-description {
+            ul,
+            ol {
+                list-style-position: inside;
+                li > * {
+                    &:nth-child(1) {
+                        display: inline;
+                    }
+                }
+            }
+        }
+    }
+    .search-item-bottom {
+        .search-item-members {
+            font-size: small;
+            color: var(--textColourSecondary);
+        }
+    }
+}
+
+.search-results-item,
+.search-results-item * {
+    transition: all 0.7s;
+}
+
+@media only screen and (max-width: 50rem) {
+    .search-results-item {
+        .search-item-top {
+            img {
+                width: 32px;
+                height: 32px;
+                border-radius: 50%;
+            }
+
+            .search-item-title * {
+                font-size: 1rem;
+            }
+        }
+    }
+}
