@@ -61,7 +61,7 @@ const SearchResultsItem = ({ searchResult }) => {
             >
                 <div className="search-item-top">
                     {renderIcon()}
-                    <div class="search-item-top-right">
+                    <div className="search-item-top-right">
                         <div className="search-item-display-name-prefixed">
                             {searchResult.data.display_name_prefixed.toLowerCase()}
                         </div>
@@ -81,7 +81,7 @@ const SearchResultsItem = ({ searchResult }) => {
                 </div>
             </div>
             <div className="search-item-bottom">
-                <div class="search-item-members">
+                <div className="search-item-members">
                     {formatNumber(searchResult.data.subscribers)} Members
                 </div>
             </div>
