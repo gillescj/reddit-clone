@@ -3,6 +3,7 @@ import '../styles/SearchBar.scss';
 import React, { useState, useContext } from 'react';
 import StateContext from './StateContext';
 import { useHistory } from 'react-router-dom';
+import { ReactComponent as ArrowSVG } from '../assets/svgs/arrow-right.svg';
 
 const SearchForm = () => {
     const { setSearchQuery } = useContext(StateContext);
@@ -21,13 +22,18 @@ const SearchForm = () => {
 
     return (
         <form onSubmit={handleFormSubmit} className="search-bar">
-            <input
-                type="text"
-                placeholder="Search subreddits"
-                className="search-bar-input"
-                value={barValue}
-                onChange={(event) => handleSearchBarChange(event)}
-            />
+            <div className="search-bar-wrapper">
+                <input
+                    type="text"
+                    placeholder="Search subreddits"
+                    className="search-bar-input"
+                    value={barValue}
+                    onChange={(event) => handleSearchBarChange(event)}
+                />
+                <button className="search-bar-button" type="submit">
+                    <ArrowSVG />
+                </button>
+            </div>
         </form>
     );
 };
