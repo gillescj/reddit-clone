@@ -17,7 +17,6 @@
         &:hover {
             text-decoration: underline;
         }
-        transition: all 0.7s;
     }
     .extra-info-title {
         font-size: 1rem;
@@ -42,6 +41,10 @@
             font-size: small;
         }
     }
+}
+
+.extra-info,
+.extra-info * {
     transition: all 0.7s;
 }
 

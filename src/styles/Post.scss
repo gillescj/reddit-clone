@@ -35,9 +35,7 @@
             color: var(--textColourPrimary);
             svg {
                 fill: var(--textColourPrimary);
-                transition: fill 0.7s;
             }
-            transition: all 0.7s;
         }
     }
     .post-right {
@@ -122,5 +120,9 @@
             }
         }
     }
+}
+
+.post,
+.post * {
     transition: all 0.7s;
 }
