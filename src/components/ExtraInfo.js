@@ -17,7 +17,7 @@ const ExtraInfo = ({ infoType }) => {
 
         const fetchData = async () => {
             if (infoType === 'home') {
-                infoUrl = 'subreddits/popular.json?limit=15';
+                infoUrl = 'subreddits/default.json?limit=15';
             } else {
                 infoUrl = `r/${settings.subreddit}/about.json`;
             }
@@ -53,7 +53,7 @@ const ExtraInfo = ({ infoType }) => {
     const renderTitle = () => {
         if (!extraInfo) return;
         if (infoType === 'home') {
-            return <h3 className="extra-info-title">Growing Subreddits</h3>;
+            return <h3 className="extra-info-title">Popular Subreddits</h3>;
         } else {
             return <h3 className="extra-info-title">{extraInfo.data.display_name}</h3>;
         }
