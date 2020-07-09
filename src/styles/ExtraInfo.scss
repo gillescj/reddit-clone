@@ -14,9 +14,7 @@
         text-decoration: none;
         color: var(--textColourPrimary);
         font-weight: bold;
-        &:hover {
-            text-decoration: underline;
-        }
+        width: fit-content;
     }
     .extra-info-title {
         font-size: 1rem;
@@ -28,7 +26,26 @@
         }
         .topSubredditList {
             display: grid;
-            grid-gap: 0.4rem;
+            grid-gap: 0.5rem;
+
+            .topSubreddit {
+                padding-left: 0.5rem;
+                display: grid;
+                grid-gap: 1rem;
+                grid-template-columns: auto 1fr;
+                .top-subreddit-left {
+                    img {
+                        width: 32px;
+                        height: 32px;
+                        border-radius: 50%;
+                    }
+                }
+            }
+            .top-subreddit-title {
+                &:hover {
+                    text-decoration: underline;
+                }
+            }
             .subscriberCount {
                 font-size: 0.7rem;
                 color: var(--textColourSecondary);

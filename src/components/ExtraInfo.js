@@ -5,6 +5,7 @@ import React, { useContext, useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import reddit from '../apis/reddit';
 import StateContext from './StateContext';
+import globeSVG from '../assets/svgs/globe.svg';
 
 const ExtraInfo = ({ infoType }) => {
     const { extraInfo, setExtraInfo, settings, setPagination } = useContext(StateContext);
@@ -59,6 +60,30 @@ const ExtraInfo = ({ infoType }) => {
         }
     };
 
+    const onImageError = (event) => {
+        event.target.src = globeSVG;
+    };
+
+    const renderIcon = (subredditObject) => {
+        if (subredditObject.data.icon_img) {
+            return (
+                <img
+                    src={subredditObject.data.icon_img}
+                    alt={subredditObject.data.display_name_prefixed}
+                    onError={(event) => onImageError(event)}
+                />
+            );
+        } else {
+            return (
+                <img
+                    src={globeSVG}
+                    alt={subredditObject.data.display_name_prefixed}
+                    onError={(event) => onImageError(event)}
+                />
+            );
+        }
+    };
+
     const renderContent = () => {
         if (!extraInfo) return;
         let renderedContent;
@@ -66,17 +91,25 @@ const ExtraInfo = ({ infoType }) => {
             if (!extraInfo.data.children) return;
             const renderedTopSubredditList = extraInfo.data.children.map((subreddit) => {
                 return (
-                    <div className="topSubreddit" key={subreddit.data.display_name}>
-                        <Link
-                            to={`/r/${subreddit.data.display_name}`.toLowerCase()}
-                            onClick={() => resetPagination()}
-                        >
-                            {subreddit.data.display_name}
-                        </Link>
-                        <div className="subscriberCount">
-                            {formatNumber(subreddit.data.subscribers)} subscribers
+                    <Link
+                        to={`/r/${subreddit.data.display_name}`.toLowerCase()}
+                        key={subreddit.data.display_name}
+                        onClick={() => resetPagination()}
+                    >
+                        <div className="topSubreddit">
+                            <div className="top-subreddit-left">
+                                {renderIcon(subreddit)}
+                            </div>
+                            <div className="top-subreddit-right">
+                                <div className="top-subreddit-title">
+                                    {subreddit.data.display_name}
+                                </div>
+                                <div className="subscriberCount">
+                                    {formatNumber(subreddit.data.subscribers)} subscribers
+                                </div>
+                            </div>
                         </div>
-                    </div>
+                    </Link>
                 );
             });
             renderedContent = (
