@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { HashRouter } from 'react-router-dom';
+import { BrowserRouter } from 'react-router-dom';
 import { Helmet } from 'react-helmet';
 import StateContext from './StateContext';
 import Header from './Header';
@@ -58,10 +58,10 @@ const App = () => {
             </Helmet>
             <StateContext.Provider value={state}>
                 <div className="container">
-                    <HashRouter>
+                    <BrowserRouter>
                         <Header />
                         <MainContainer />
-                    </HashRouter>
+                    </BrowserRouter>
                 </div>
             </StateContext.Provider>
         </>
