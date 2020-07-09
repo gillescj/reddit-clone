@@ -21,6 +21,10 @@ const App = () => {
         orderBy: 'hot',
         limit: 10,
     });
+
+    const [searchQuery, setSearchQuery] = useState();
+    const [searchResults, setSearchResults] = useState();
+
     const [url, setUrl] = useState(
         `${settings.page}${settings.orderBy}.json?limit=${settings.limit}&${pagination.query}&g=GLOBAL`
     );
@@ -37,6 +41,10 @@ const App = () => {
         setExtraInfo,
         settings,
         setSettings,
+        searchQuery,
+        setSearchQuery,
+        searchResults,
+        setSearchResults,
         url,
         setUrl,
         loading,

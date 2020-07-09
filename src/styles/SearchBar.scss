@@ -1,0 +1,47 @@
+.search-bar {
+    .search-bar-wrapper {
+        display: grid;
+        align-items: center;
+
+        grid-template-columns: 8rem 2rem;
+        border: hsl(206, 20%, 70%) 2px solid;
+        border-radius: 0.2rem;
+        width: fit-content;
+        &:hover {
+            outline: none;
+            border-color: #0079d3;
+        }
+        input {
+            font-size: 0.75rem;
+            background: var(--commentEvenBackground);
+            color: var(--textColourPrimary);
+            padding: 0.3rem;
+            border: none;
+            height: 2rem;
+        }
+        button {
+            border: none;
+            background: none;
+            cursor: pointer;
+            svg {
+                display: block;
+                margin: auto;
+                stroke: var(--textColourPrimary);
+            }
+        }
+    }
+}
+
+@media only screen and (max-width: 30rem) {
+    .search-bar {
+        grid-column: 1 / -1;
+        grid-row: 2;
+        .search-bar-wrapper {
+            grid-template-columns: auto 2rem;
+            width: 100%;
+            input {
+                width: 100%;
+            }
+        }
+    }
+}

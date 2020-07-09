@@ -8,7 +8,8 @@
     padding: 1rem;
     .header-container {
         display: grid;
-        gap: 1rem;
+        grid-gap: 0 1rem;
+        align-items: center;
         grid-template-columns: auto 1fr auto;
         .brand {
             font-weight: bold;
@@ -19,4 +20,19 @@
         }
     }
     transition: all 0.7s;
+}
+
+.header,
+header * {
+    transition: 0.7s;
+}
+
+@media only screen and (max-width: 30rem) {
+    .header {
+        padding: 0.5rem 1rem;
+        .header-container {
+            grid-template-columns: auto auto;
+            grid-gap: 0.5rem 1rem;
+        }
+    }
 }

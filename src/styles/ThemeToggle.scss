@@ -1,5 +1,11 @@
 .theme-toggle {
+    display: grid;
     .theme-toggle-button {
+        display: grid;
+        justify-self: end;
         cursor: pointer;
+        svg {
+            align-self: center;
+        }
     }
 }
