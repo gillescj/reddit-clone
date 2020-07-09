@@ -6,9 +6,12 @@ import PostList from './PostList';
 import ExtraInfo from './ExtraInfo';
 
 const Subreddit = ({ match }) => {
-    const { settings, setSettings, pagination, setUrl } = useContext(StateContext);
+    const { settings, setSettings, pagination, setUrl, setLoading } = useContext(
+        StateContext
+    );
 
     useEffect(() => {
+        setLoading(true);
         setSettings((previousSettings) => {
             return {
                 ...previousSettings,
@@ -18,6 +21,7 @@ const Subreddit = ({ match }) => {
         });
         const subredditUrl = `r/${match.params.subreddit}/${settings.orderBy}.json?limit=${settings.limit}&${pagination.query}&g=GLOBAL`;
         setUrl(subredditUrl);
+        setLoading(false);
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, []);
 
