@@ -4,7 +4,7 @@ import numeral from 'numeral';
 import showdown from 'showdown';
 import ReactHtmlParser from 'react-html-parser';
 
-import React, { useState, useContext, useEffect } from 'react';
+import React, { useState, useContext, useLayoutEffect } from 'react';
 import { Link } from 'react-router-dom';
 import { ReactComponent as ExternalLinkSVG } from '../assets/svgs/external-link.svg';
 import StateContext from './StateContext';
@@ -16,7 +16,7 @@ const Post = ({ post, detailed }) => {
 
     const converter = new showdown.Converter();
 
-    useEffect(() => {
+    useLayoutEffect(() => {
         if (post.data.selftext !== '') {
             setContentType('text');
         } else if (/(http(s?):)([/|.|\w|\s|-])*\.(?:jpe?g|png)/.test(post.data.url)) {
