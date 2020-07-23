@@ -4,9 +4,10 @@ import { Helmet } from 'react-helmet';
 import StateContext from './StateContext';
 import Header from './Header';
 import MainContainer from './MainContainer';
+import useLocalStorage from '../hooks/useLocalStorage';
 
 const App = () => {
-    const [theme, setTheme] = useState('light');
+    const [theme, setTheme] = useLocalStorage('theme', 'light');
     const [posts, setPosts] = useState([]);
     const [pagination, setPagination] = useState({
         pageNumber: 1,
