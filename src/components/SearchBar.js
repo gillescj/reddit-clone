@@ -16,8 +16,10 @@ const SearchForm = () => {
 
     const handleFormSubmit = (event) => {
         event.preventDefault();
-        setSearchQuery(barValue);
-        history.push(`/search/${encodeURIComponent(barValue)}`);
+        if (barValue.trim() !== '') {
+            setSearchQuery(barValue.trim());
+            history.push(`/search/${encodeURIComponent(barValue.trim())}`);
+        }
     };
 
     return (
