@@ -15,12 +15,27 @@ const SearchResults = () => {
         }
     }, [searchQuery, searchString, setSearchQuery]);
 
+    const emptySearchResults = (
+        <div className="search-results-empty">
+            <header>No Subreddits Found!</header>
+            <p>
+                We couldn't find any subreddits. Please try searching something different.
+            </p>
+        </div>
+    );
+
     return (
         <>
             {!searchResults ? null : (
                 <div className="search-results">
-                    <h1>Subreddit Search Results</h1>
-                    <SearchResultsItemList searchResults={searchResults} />
+                    {searchResults.length === 0 ? (
+                        emptySearchResults
+                    ) : (
+                        <>
+                            <h1>Subreddit Search Results</h1>
+                            <SearchResultsItemList searchResults={searchResults} />
+                        </>
+                    )}
                 </div>
             )}
         </>
