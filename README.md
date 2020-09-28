@@ -17,6 +17,6 @@ npm install
 npm run start
 ```
 
-![ReactJS Subreddit Page Desktop](https://github.com/gillescj/files/blob/master/mobile-reddit-clone-screenshot.jpg?raw=true)
+![ReactJS Subreddit Page Desktop](https://github.com/gillescj/files/blob/master/reddit-clone-screenshot.png?raw=true)
 
-![ReactJS Subreddit Page Mobile](https://github.com/gillescj/files/blob/master/reddit-clone-screenshot.png?raw=true)
+![ReactJS Subreddit Page Mobile](https://github.com/gillescj/files/blob/master/mobile-reddit-clone-screenshot.jpg?raw=true)
